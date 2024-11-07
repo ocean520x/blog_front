@@ -3,6 +3,7 @@
   <div>
     {{ userStore.name }}
     {{ test }}
+    <icon-hourglass/>
   </div>
 </template>
 

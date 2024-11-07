@@ -7,6 +7,9 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AuthLogin: typeof import('./../src/views/auth/login.vue')['default']
+    AuthRegister: typeof import('./../src/views/auth/register.vue')['default']
+    AuthRepassword: typeof import('./../src/views/auth/repassword.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     Front: typeof import('./../src/layout/front.vue')['default']
     Home: typeof import('./../src/views/home.vue')['default']
