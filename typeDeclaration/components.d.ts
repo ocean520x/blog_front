@@ -11,6 +11,8 @@ declare module 'vue' {
     AuthRegister: typeof import('./../src/views/auth/register.vue')['default']
     AuthRepassword: typeof import('./../src/views/auth/repassword.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElLink: typeof import('element-plus/es')['ElLink']
     Front: typeof import('./../src/layout/front.vue')['default']
     Home: typeof import('./../src/views/home.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
