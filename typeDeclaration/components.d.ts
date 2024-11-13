@@ -16,6 +16,7 @@ declare module 'vue' {
     ElLink: typeof import('element-plus/es')['ElLink']
     Front: typeof import('./../src/layout/front.vue')['default']
     Home: typeof import('./../src/views/home.vue')['default']
+    List: typeof import('./../src/views/list.vue')['default']
     MarkdownEditor: typeof import('./../src/components/markdown/editor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
