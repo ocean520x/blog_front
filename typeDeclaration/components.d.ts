@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    Auth: typeof import('./../src/layout/auth.vue')['default']
     AuthLogin: typeof import('./../src/views/auth/login.vue')['default']
     AuthRegister: typeof import('./../src/views/auth/register.vue')['default']
     AuthRepassword: typeof import('./../src/views/auth/repassword.vue')['default']
@@ -15,6 +16,7 @@ declare module 'vue' {
     ElLink: typeof import('element-plus/es')['ElLink']
     Front: typeof import('./../src/layout/front.vue')['default']
     Home: typeof import('./../src/views/home.vue')['default']
+    MarkdownEditor: typeof import('./../src/components/markdown/editor.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
