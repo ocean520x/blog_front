@@ -7,6 +7,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    AnimateList: typeof import('./../src/components/animate/list.vue')['default']
     Auth: typeof import('./../src/layout/auth.vue')['default']
     AuthLogin: typeof import('./../src/views/auth/login.vue')['default']
     AuthRegister: typeof import('./../src/views/auth/register.vue')['default']
