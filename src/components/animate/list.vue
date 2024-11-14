@@ -33,16 +33,5 @@ const listEnter = (el: RendererElement) => {
 </template>
 
 <style scoped>
-.list-leave-active {
-  transition: all 0.5s ease;
-  @apply absolute w-full;
-}
 
-.list-leave-to {
-  opacity: 0;
-}
-
-.list-move {
-  transition: all 1s ease;
-}
 </style>
