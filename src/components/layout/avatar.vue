@@ -7,7 +7,7 @@ const show = ref(false);
 <template>
   <div class="relative">
     <div class="flex items-center justify-center gap-2" @click="show = !show">
-      <el-avatar shape="square" :size="32" src="../../../../public/images/avatar.png" />
+      <el-avatar shape="square" :size="32" src="/images/avatar.png" />
       <span class="text-xs hover:text-green-600 duration-300 cursor-pointer">JOJO</span>
     </div>
     <div v-show="show" class="flex flex-col absolute px-1 py-2 z-50 bg-white border border-slate-400 shadow rounded">
