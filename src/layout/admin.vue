@@ -8,8 +8,10 @@
         <layout-breadcrumb />
         <layout-history />
       </div>
-      <div class="bg-green-100 p-2 mt-2">
-        <router-view />
+      <div class="relative overflow-y-auto mt-2">
+        <router-view #default="{ Component }">
+          <component class="absolute w-full" :is="Component"></component>
+        </router-view>
       </div>
     </div>
   </div>
