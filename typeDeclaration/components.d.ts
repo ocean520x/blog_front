@@ -33,6 +33,7 @@ declare module 'vue' {
     Front: typeof import('./../src/layout/front.vue')['default']
     Home: typeof import('./../src/views/home.vue')['default']
     LayoutBreadcrumb: typeof import('./../src/components/layout/breadcrumb.vue')['default']
+    LayoutHistory: typeof import('./../src/components/layout/history.vue')['default']
     LayoutMenu: typeof import('./../src/components/layout/menu.vue')['default']
     List: typeof import('./../src/views/list.vue')['default']
     MarkdownEditor: typeof import('./../src/components/markdown/editor.vue')['default']
