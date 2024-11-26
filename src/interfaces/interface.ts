@@ -11,3 +11,8 @@ interface Menu {
 export interface MyMenu extends Menu {
   children?: Menu[];
 }
+
+export interface MyLocalData {
+  data: any;
+  expire?: number;
+}
