@@ -1,4 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import menuStore from '@/store/menuStore';
+
+const menu = menuStore();
+menu.init();
+</script>
 
 <template>
   <div class="h-screen w-screen grid grid-cols-[auto_1fr]">

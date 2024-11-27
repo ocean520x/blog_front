@@ -22,6 +22,8 @@ declare global {
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
   const markRaw: typeof import('vue')['markRaw']
+  const menu: (typeof import('@/store/menuStore'))['default']
+  const menuStore: typeof import('../src/store/menuStore')['default']
   const myLocalStore: typeof import('../src/composables/myLocalStore')['default']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
@@ -97,6 +99,7 @@ declare module 'vue' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly menuStore: UnwrapRef<typeof import('../src/store/menuStore')['default']>
     readonly myLocalStore: UnwrapRef<typeof import('../src/composables/myLocalStore')['default']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
