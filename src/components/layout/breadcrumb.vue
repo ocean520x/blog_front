@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ArrowRight } from '@element-plus/icons-vue';
 import showHideMenu from '@/store/showHideMenu';
 </script>
 
@@ -13,12 +12,7 @@ import showHideMenu from '@/store/showHideMenu';
         v-if="showHideMenu().show"
       />
       <icon-align-right-one fill="#7ed321" class="cursor-pointer" @click="showHideMenu().toggle()" v-else />
-
-      <el-breadcrumb :separator-icon="ArrowRight">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/' }">用户管理</el-breadcrumb-item>
-        <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-      </el-breadcrumb>
+      <layout-breadcrumb-route />
     </div>
     <layout-avatar />
   </div>

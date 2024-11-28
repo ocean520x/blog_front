@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import { MyMenu } from '@/interfaces/interface';
+import { MenuStore, MyMenu } from '@/interfaces/interface';
 import routes from '@/router/routes';
 import { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
 import MyLocalStore from '@/composables/myLocalStore';
 
-export default defineStore('menu', () => {
+export default defineStore('menu', (): MenuStore => {
   const menus = ref<MyMenu[]>([]);
   const historyMenus = ref<MyMenu[]>([]);
+  const breadcrumbRoute = ref<null | RouteLocationNormalizedLoadedGeneric>(null);
 
   function init() {
     getMenuByRoutes();
@@ -34,6 +35,7 @@ export default defineStore('menu', () => {
 
   function addHistoryMenus(route: RouteLocationNormalizedLoadedGeneric) {
     if (!route.meta?.menu) return;
+    breadcrumbRoute.value = route;
     const historyMenu = { ...route.meta?.menu, routeName: route.name } as MyMenu;
     const hasSame = historyMenus.value.some((menu) => menu.routeName === route.name);
     if (!hasSame) historyMenus.value.unshift(historyMenu);
@@ -60,5 +62,5 @@ export default defineStore('menu', () => {
     });
   }
 
-  return { menus, init, historyMenus, addHistoryMenus, removeHistoryMenus, setCurrentMenu };
+  return { menus, init, historyMenus, addHistoryMenus, removeHistoryMenus, setCurrentMenu, breadcrumbRoute };
 });

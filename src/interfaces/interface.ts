@@ -16,3 +16,14 @@ export interface MyLocalData {
   data: any;
   expire?: number;
 }
+
+export interface MenuStore {
+  menus: MyMenu[];
+  historyMenus: MyMenu[];
+  breadcrumbRoute: null | RouteLocationNormalizedLoadedGeneric;
+  init: () => void;
+  getMenuByRoutes: () => void;
+  addHistoryMenus: (route: RouteLocationNormalizedLoadedGeneric) => void;
+  removeHistoryMenus: (menu: MyMenu) => void;
+  setCurrentMenu: (route: RouteLocationNormalizedLoadedGeneric) => void;
+}
