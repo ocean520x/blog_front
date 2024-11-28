@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import menuStore from '@/store/menuStore';
-
+import showHideMenu from '@/store/showHideMenu';
+import { useRoute } from 'vue-router';
 const menu = menuStore();
 menu.init();
+const route = useRoute();
+watch(route, () => {
+  menu.addHistoryMenus(route);
+});
 </script>
 
 <template>
   <div class="h-screen w-screen grid grid-cols-[auto_1fr]">
     <layout-menu />
-    <div class="bg-slate-200 text-gray-700 grid grid-rows-[auto_1fr]">
+    <div class="bg-slate-200 text-gray-700 grid grid-rows-[auto_1fr]" :class="{ 'w-screen': !showHideMenu().show }">
       <div class="top">
         <layout-breadcrumb />
         <layout-history />

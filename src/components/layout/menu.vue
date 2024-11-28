@@ -2,6 +2,7 @@
 import menuStore from '@/store/menuStore';
 import { MyMenu } from '@/interfaces/interface';
 import * as Icon from '@icon-park/vue-next';
+import showHideMenu from '@/store/showHideMenu';
 const menus = menuStore().menus;
 const router = useRouter();
 const resetMenus = () => {
@@ -25,7 +26,7 @@ const clickMenu = (menu: MyMenu, childMenu?: MyMenu) => {
 </script>
 
 <template>
-  <div class="bg-slate-800 w-[220px]">
+  <div class="bg-slate-800 w-[220px]" v-show="showHideMenu().show">
     <h2 class="flex items-center justify-center mt-4 text-slate-100 gap-2">
       <icon-circle-four size="22" fill="#7ed321" />
       <span>欧顺论坛后台管理</span>
@@ -34,7 +35,6 @@ const clickMenu = (menu: MyMenu, childMenu?: MyMenu) => {
       <section class="mt-2">
         <div class="flex justify-between items-center px-4 py-2" @click="clickMenu(menu)">
           <div class="flex items-center gap-1 cursor-pointer">
-            <!--            <icon-every-user />-->
             <component :is="Icon[menu.icon]" />
             <span>{{ menu.title }}</span>
           </div>

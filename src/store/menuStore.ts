@@ -2,9 +2,11 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { MyMenu } from '@/interfaces/interface';
 import routes from '@/router/routes';
+import { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
 
 export default defineStore('menu', () => {
-  const menus = ref([] as MyMenu[]);
+  const menus = ref<MyMenu[]>([]);
+  const historyMenus = ref<MyMenu[]>([]);
 
   function init() {
     getMenuByRoutes();
@@ -28,5 +30,12 @@ export default defineStore('menu', () => {
       }) as MyMenu[];
   }
 
-  return { menus, init };
+  function addHistoryMenus(route: RouteLocationNormalizedLoadedGeneric) {
+    const historyMenu = { ...route.meta?.menu, routeName: route.name } as MyMenu;
+    const hasSame = historyMenus.value.some((menu) => menu.routeName === route.name);
+    if (!hasSame) historyMenus.value.unshift(historyMenu);
+    if (historyMenus.value.length > 10) historyMenus.value.pop();
+  }
+
+  return { menus, init, historyMenus, addHistoryMenus };
 });
