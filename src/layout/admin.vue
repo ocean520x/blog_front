@@ -5,9 +5,14 @@ import { useRoute } from 'vue-router';
 const menu = menuStore();
 menu.init();
 const route = useRoute();
-watch(route, () => {
-  menu.addHistoryMenus(route);
-});
+watch(
+  route,
+  () => {
+    menu.addHistoryMenus(route);
+    menu.setCurrentMenu(route);
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
