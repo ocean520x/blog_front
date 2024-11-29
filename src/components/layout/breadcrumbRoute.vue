@@ -7,7 +7,7 @@ const breadcrumbRoute = menuStore().breadcrumbRoute;
 <template>
   <el-breadcrumb :separator-icon="ArrowRight">
     <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <template v-for="(route, index) in breadcrumbRoute.matched" :key="index">
+    <template v-for="route in breadcrumbRoute.matched" :key="route.name">
       <el-breadcrumb-item :to="{ name: route.name }"> {{ route.meta.menu?.title }}</el-breadcrumb-item>
     </template>
   </el-breadcrumb>

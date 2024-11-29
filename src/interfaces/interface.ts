@@ -1,5 +1,6 @@
 import { IconType } from '@icon-park/vue-next/es/all';
-
+import { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
+import type { Ref } from 'vue';
 interface Menu {
   title: string;
   isChoose?: boolean;
@@ -18,8 +19,8 @@ export interface MyLocalData {
 }
 
 export interface MenuStore {
-  menus: MyMenu[];
-  historyMenus: MyMenu[];
+  menus: Ref<MyMenu[]>;
+  historyMenus: Ref<MyMenu[]>;
   breadcrumbRoute: null | RouteLocationNormalizedLoadedGeneric;
   init: () => void;
   getMenuByRoutes: () => void;
