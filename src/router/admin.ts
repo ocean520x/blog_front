@@ -4,6 +4,7 @@ export default [
   {
     path: '/admin',
     redirect: { name: 'user.index' },
+    name: 'admin',
     component: () => import('@/layout/admin.vue'),
     meta: { auth: true, menu: { title: '用户管理', sort: 1, icon: 'EveryUser' } },
     children: [
