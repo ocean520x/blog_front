@@ -17,6 +17,7 @@ export default () => {
         data,
       });
       myLocalStore().set('token', res.data.token);
+      myLocalStore().set('userInfo', res.data.user);
       router.push({ name: 'admin' });
     } catch (error) {}
   };

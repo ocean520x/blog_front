@@ -1,4 +1,14 @@
+export interface UserModel {
+  updated_at: string;
+  name: string;
+  created_at: string;
+  email_verified_at: string;
+  id: number;
+  avatar?: string;
+  email: string;
+}
 export interface LoginData {
+  user: UserModel;
   token: string;
 }
 
