@@ -11,6 +11,7 @@
       <form action="#">
         <div class="mb-4 text-lg">
           <el-input v-model="form.phone" style="width: 300px" placeholder="id@email.com" clearable />
+          <error-alert name="phone" />
         </div>
 
         <div class="mb-4 text-lg">
@@ -22,6 +23,7 @@
             placeholder="*********"
             clearable
           />
+          <error-alert name="password" />
         </div>
 
         <div class="mt-8 flex justify-center text-lg text-black">

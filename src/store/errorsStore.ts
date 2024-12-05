@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 export default defineStore('error', () => {
   const errors = ref<Record<string, any>>({});
 
-  const getError = computed((key: string) => errors.value[key]);
-  const hasError = computed(() => Object.keys(errors.value).length > 0);
+  const getError = (key: string) => errors.value[key];
+  const hasError = () => Object.keys(errors.value).length > 0;
 
   function resetError() {
     errors.value = {};

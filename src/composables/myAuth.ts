@@ -15,6 +15,10 @@ export default () => {
     return false;
   };
 
+  const isLogin = () => {
+    return !!myLocalStore().get('token');
+  };
+
   const login = async (data: any) => {
     try {
       const res = await myAxios.request<ApiData<LoginData>>({
@@ -29,11 +33,16 @@ export default () => {
     } catch (error) {}
   };
 
-  const logout = () => {
+  const logout = async () => {
+    // 处理后端的退出登录业务
+    await myAxios.request({
+      url: 'logout',
+      method: 'POST',
+    });
     myLocalStore().remove('token');
     myLocalStore().remove('userInfo');
     router.push({ name: 'home' });
   };
 
-  return { form, login, isSuperAdmin, logout };
+  return { form, login, isSuperAdmin, logout, isLogin };
 };
