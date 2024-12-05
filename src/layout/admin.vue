@@ -2,6 +2,9 @@
 import menuStore from '@/store/menuStore';
 import showHideMenu from '@/store/showHideMenu';
 import { useRoute } from 'vue-router';
+import { UserModel } from '@/interfaces/apiResponse';
+import myLocalStore from '@/composables/myLocalStore';
+import router from '@/router';
 const menu = menuStore();
 menu.init();
 const route = useRoute();
@@ -13,6 +16,8 @@ watch(
   },
   { immediate: true },
 );
+const info: UserModel = myLocalStore().get('userInfo');
+if (info.is_super_admin == 'no' || !info.is_super_admin) router.push({ name: 'home' });
 </script>
 
 <template>

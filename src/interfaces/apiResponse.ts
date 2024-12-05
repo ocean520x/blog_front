@@ -6,6 +6,7 @@ export interface UserModel {
   id: number;
   avatar?: string;
   email: string;
+  is_super_admin: string;
 }
 export interface LoginData {
   user: UserModel;

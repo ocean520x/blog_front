@@ -24,7 +24,8 @@ export default () => {
       });
       myLocalStore().set('token', res.data.token);
       myLocalStore().set('userInfo', res.data.user);
-      router.push({ name: 'admin' });
+      // 是否超级管理员
+      isSuperAdmin() ? router.push({ name: 'admin' }) : router.push({ name: 'home' });
     } catch (error) {}
   };
 
