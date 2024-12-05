@@ -1,5 +1,5 @@
 import myAxios from '@/plugins/axios';
-import { ApiData, LoginData } from '@/interfaces/apiResponse';
+import { ApiData, LoginData, UserModel } from '@/interfaces/apiResponse';
 import myLocalStore from '@/composables/myLocalStore';
 import router from '@/router';
 
@@ -8,6 +8,12 @@ export default () => {
     phone: '18688226300',
     password: '123456',
   });
+
+  const isSuperAdmin = () => {
+    const info: UserModel = myLocalStore().get('userInfo');
+    if (info) return info.id == 1;
+    return false;
+  };
 
   const login = async (data: any) => {
     try {
@@ -22,5 +28,11 @@ export default () => {
     } catch (error) {}
   };
 
-  return { form, login };
+  const logout = () => {
+    myLocalStore().remove('token');
+    myLocalStore().remove('userInfo');
+    router.push({ name: 'home' });
+  };
+
+  return { form, login, isSuperAdmin, logout };
 };

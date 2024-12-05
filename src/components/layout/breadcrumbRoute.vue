@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowRight } from '@element-plus/icons-vue';
-import menuStore from '@/store/menuStore';
-const breadcrumbRoute = menuStore().breadcrumbRoute;
+import { useRoute } from 'vue-router';
+const breadcrumbRoute = useRoute();
 </script>
 
 <template>

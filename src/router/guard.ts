@@ -1,9 +1,8 @@
-import router from '@/router/index';
 import { RouteLocationNormalized, Router } from 'vue-router';
 import myLocalStore from '@/composables/myLocalStore';
 
 class Guard {
-  public constructor(private router) {}
+  public constructor(private router: Router) {}
 
   public run() {
     this.router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized) => {

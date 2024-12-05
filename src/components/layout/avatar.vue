@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import myLocalStore from '@/composables/myLocalStore';
+import { UserModel } from '@/interfaces/apiResponse';
+import myAuth from '@/composables/myAuth';
 
 const show = ref(false);
 const isFullScreen = ref<boolean>(false);
-
+const info: UserModel = myLocalStore().get('userInfo');
 const toggleFullScreen = () => {
   isFullScreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   isFullScreen.value = !isFullScreen.value;
@@ -23,11 +26,13 @@ onUnmounted(() => {
 
 <template>
   <div class="relative">
-    <div class="flex items-center justify-center gap-2">
+    <div class="flex items-center justify-center gap-2" v-if="info">
       <icon-full-screen-one size="20" fill="#7ed321" v-if="!isFullScreen" @click="toggleFullScreen" />
       <icon-off-screen-one size="20" fill="#7ed321" v-else @click="toggleFullScreen" />
-      <el-avatar shape="square" :size="32" src="/images/avatar.png" />
-      <span class="text-xs hover:text-green-600 duration-300 cursor-pointer" @click="show = !show">JOJO</span>
+      <el-avatar shape="square" :size="32" :src="info?.avatar ? info.avatar : '/images/avatar.png'" />
+      <span class="text-xs hover:text-green-600 duration-300 cursor-pointer" @click="show = !show">{{
+        info.name
+      }}</span>
     </div>
     <div
       v-show="show"
@@ -36,7 +41,7 @@ onUnmounted(() => {
       <span class="span-item">个人中心</span>
       <span class="span-item">设置头像</span>
       <span class="span-item">重置密码</span>
-      <span class="span-item">退出登录</span>
+      <span class="span-item" @click="myAuth().logout">退出登录</span>
     </div>
   </div>
 </template>

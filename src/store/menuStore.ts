@@ -8,7 +8,6 @@ import MyLocalStore from '@/composables/myLocalStore';
 export default defineStore('menu', (): MenuStore => {
   const menus = ref<MyMenu[]>([]);
   const historyMenus = ref<MyMenu[]>([]);
-  const breadcrumbRoute = ref<null | RouteLocationNormalizedLoadedGeneric>(null);
 
   function init() {
     getMenuByRoutes();
@@ -35,7 +34,6 @@ export default defineStore('menu', (): MenuStore => {
 
   function addHistoryMenus(route: RouteLocationNormalizedLoadedGeneric) {
     if (!route.meta?.menu) return;
-    breadcrumbRoute.value = route;
     const historyMenu = { ...route.meta?.menu, routeName: route.name } as MyMenu;
     const hasSame = historyMenus.value.some((menu) => menu.routeName === route.name);
     if (!hasSame) historyMenus.value.unshift(historyMenu);
@@ -62,5 +60,5 @@ export default defineStore('menu', (): MenuStore => {
     });
   }
 
-  return { menus, init, historyMenus, addHistoryMenus, removeHistoryMenus, setCurrentMenu, breadcrumbRoute };
+  return { menus, init, historyMenus, addHistoryMenus, removeHistoryMenus, setCurrentMenu };
 });
