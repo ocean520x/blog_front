@@ -10,13 +10,7 @@
       </div>
       <form action="#">
         <div class="mb-4 text-lg">
-          <el-input
-            v-model="form.phone"
-            v-clearError="'phone'"
-            style="width: 300px"
-            placeholder="id@email.com"
-            clearable
-          />
+          <el-input v-model="form.phone" v-clearError="'phone'" placeholder="id@email.com" clearable />
           <error-alert name="phone" />
         </div>
 
@@ -24,7 +18,6 @@
           <el-input
             v-model="form.password"
             v-clearError="'password'"
-            style="width: 300px"
             type="password"
             show-password
             placeholder="*********"
@@ -32,7 +25,7 @@
           />
           <error-alert name="password" />
         </div>
-
+        <captcha-img />
         <div class="mt-8 flex justify-center text-lg text-black">
           <el-button round type="primary" size="large" @click="onSubmit">登陆</el-button>
         </div>

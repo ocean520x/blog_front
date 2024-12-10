@@ -19,3 +19,9 @@ export interface ApiData<T> {
   success: boolean;
   message?: string;
 }
+
+export interface MyCaptcha {
+  img: string;
+  sensitive: boolean;
+  key: string;
+}

@@ -30,6 +30,10 @@ export default defineConfig(({ command }) => {
           target: 'http://127.0.0.1:80',
           changeOrigin: true,
         },
+        '/captcha': {
+          target: 'http://127.0.0.1:80',
+          changeOrigin: true,
+        },
       },
     },
   };
