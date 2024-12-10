@@ -10,13 +10,20 @@
       </div>
       <form action="#">
         <div class="mb-4 text-lg">
-          <el-input v-model="form.phone" style="width: 300px" placeholder="id@email.com" clearable />
+          <el-input
+            v-model="form.phone"
+            v-clearError="'phone'"
+            style="width: 300px"
+            placeholder="id@email.com"
+            clearable
+          />
           <error-alert name="phone" />
         </div>
 
         <div class="mb-4 text-lg">
           <el-input
             v-model="form.password"
+            v-clearError="'password'"
             style="width: 300px"
             type="password"
             show-password
