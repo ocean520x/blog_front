@@ -7,6 +7,8 @@ export default () => {
   const form = reactive({
     phone: '18688226300',
     password: '123456',
+    captchaCode: '',
+    captchaKey: '',
   });
 
   const isSuperAdmin = () => {

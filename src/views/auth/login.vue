@@ -25,7 +25,7 @@
           />
           <error-alert name="password" />
         </div>
-        <captcha-img />
+        <captcha-img v-model:captchaCode="form.captchaCode" v-model:captchaKey="form.captchaKey" />
         <div class="mt-8 flex justify-center text-lg text-black">
           <el-button round type="primary" size="large" @click="onSubmit">登陆</el-button>
         </div>
