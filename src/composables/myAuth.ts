@@ -2,13 +2,15 @@ import myAxios from '@/plugins/axios';
 import { ApiData, LoginData, UserModel } from '@/interfaces/apiResponse';
 import myLocalStore from '@/composables/myLocalStore';
 import router from '@/router';
+import myCaptcha from '@/composables/myCaptcha';
 
 export default () => {
+  const { showCaptcha } = myCaptcha();
   const form = reactive({
     phone: '18688226300',
     password: '123456',
-    captchaCode: '',
-    captchaKey: '',
+    captcha_code: '',
+    captcha_key: '',
   });
 
   const isSuperAdmin = () => {
@@ -32,7 +34,9 @@ export default () => {
       myLocalStore().set('userInfo', res.data.user);
       // 是否超级管理员
       isSuperAdmin() ? router.push({ name: 'admin' }) : router.push({ name: 'home' });
-    } catch (error) {}
+    } catch (error) {
+      await showCaptcha();
+    }
   };
 
   const logout = async () => {
