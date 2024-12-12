@@ -9,7 +9,7 @@ const { name } = defineProps<{
 <template>
   <el-alert
     v-show="errorsStore().getError(name)"
-    style="margin-top: 6px"
+    style="margin: 6px 0 10px"
     :title="errorsStore().getError(name)"
     type="error"
     show-icon

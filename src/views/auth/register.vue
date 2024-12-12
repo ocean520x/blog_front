@@ -10,12 +10,19 @@
       </div>
       <form action="#">
         <div class="mb-4 text-lg">
-          <el-input v-model="form.tel" style="width: 300px" placeholder="请输入手机号" clearable />
+          <el-input
+            v-model="form.phone"
+            v-clearError="'phone'"
+            style="width: 300px"
+            placeholder="请输入手机号"
+            clearable
+          />
         </div>
-
+        <error-alert name="phone" />
         <div class="mb-4 text-lg">
           <el-input
             v-model="form.password"
+            v-clearError="'password'"
             style="width: 300px"
             type="password"
             show-password
@@ -23,10 +30,11 @@
             clearable
           />
         </div>
-
+        <error-alert name="password" />
         <div class="mb-4 text-lg">
           <el-input
-            v-model="form.confirmPassword"
+            v-model="form.password_confirmation"
+            v-clearError="'password_confirmation'"
             style="width: 300px"
             type="password"
             show-password
@@ -34,9 +42,10 @@
             clearable
           />
         </div>
-        <captcha-code v-model="form.code" />
+        <error-alert name="password_confirmation" />
+        <captcha-code v-model="form.code" :phone="form.phone" />
         <div class="mt-8 flex justify-center text-lg text-black">
-          <el-button round type="success" size="large">
+          <el-button @click="onSubmit" round type="success" size="large">
             <icon-user class="mr-2" />
             确认注册
           </el-button>
@@ -48,12 +57,14 @@
 </template>
 
 <script setup lang="ts">
-const form = reactive({
-  tel: '',
-  password: '',
-  confirmPassword: '',
-  code: '',
-});
+import myAuth from '@/composables/myAuth';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+const { form, register } = myAuth();
+const onSubmit = async () => {
+  await register(form);
+  await router.push({ name: 'login' });
+};
 </script>
 
 <style scoped>

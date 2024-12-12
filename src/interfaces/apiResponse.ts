@@ -13,11 +13,16 @@ export interface LoginData {
   token: string;
 }
 
+export interface RegisterData {
+  user: UserModel;
+  token: string;
+}
+
 export interface ApiData<T> {
   code: number;
+  message?: string;
   data: T;
   success: boolean;
-  message?: string;
 }
 
 export interface MyCaptcha {
