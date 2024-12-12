@@ -37,6 +37,7 @@ declare module 'vue' {
     ErrorError: typeof import('./../src/components/error/error.vue')['default']
     Front: typeof import('./../src/layout/front.vue')['default']
     Home: typeof import('./../src/views/home.vue')['default']
+    LayoutAuthFooter: typeof import('./../src/components/layout/authFooter.vue')['default']
     LayoutAvatar: typeof import('./../src/components/layout/avatar.vue')['default']
     LayoutBreadcrumb: typeof import('./../src/components/layout/breadcrumb.vue')['default']
     LayoutBreadcrumbRoute: typeof import('./../src/components/layout/breadcrumbRoute.vue')['default']

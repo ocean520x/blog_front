@@ -35,21 +35,7 @@
           <el-button round type="primary" size="large" @click="onSubmit">登陆</el-button>
         </div>
       </form>
-
-      <div class="flex items-center justify-center text-white text-xs gap-3 mt-8">
-        <a href="#" class="flex items-center gap-1 hover:text-pink-300 duration-300">
-          <icon-home />
-          进入首页</a
-        >
-        <a href="#" class="flex items-center gap-1 hover:text-pink-300 duration-300">
-          <icon-user />
-          注册用户</a
-        >
-        <a href="#" class="flex items-center gap-1 hover:text-pink-300 duration-300">
-          <icon-face-recognition />
-          找回密码</a
-        >
-      </div>
+      <layout-auth-footer />
     </div>
   </div>
 </template>
