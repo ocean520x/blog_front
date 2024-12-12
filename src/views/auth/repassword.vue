@@ -34,12 +34,7 @@
             clearable
           />
         </div>
-
-        <div class="mb-4 flex items-center justify-center gap-2">
-          <el-input v-model="form.code" placeholder="请输入验证码" />
-          <el-button type="success">发送验证码</el-button>
-        </div>
-
+        <captcha-code v-model="form.code" />
         <div class="mt-8 flex justify-center text-lg text-black">
           <el-button round type="primary" size="large"><icon-setting-three class="mr-2" />确认</el-button>
         </div>
@@ -54,6 +49,7 @@ const form = reactive({
   tel: '',
   password: '',
   confirmPassword: '',
+  code: '',
 });
 </script>
 
