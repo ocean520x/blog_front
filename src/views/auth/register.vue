@@ -13,7 +13,7 @@
           <el-input
             v-model="form.phone"
             v-clearError="'phone'"
-            style="width: 300px"
+            style="min-width: 300px"
             placeholder="请输入手机号"
             clearable
           />
@@ -23,7 +23,7 @@
           <el-input
             v-model="form.password"
             v-clearError="'password'"
-            style="width: 300px"
+            style="min-width: 300px"
             type="password"
             show-password
             placeholder="请输入密码"
@@ -35,7 +35,7 @@
           <el-input
             v-model="form.password_confirmation"
             v-clearError="'password_confirmation'"
-            style="width: 300px"
+            style="min-width: 300px"
             type="password"
             show-password
             placeholder="确认密码"

@@ -3,6 +3,7 @@ import { ApiData, LoginData, RegisterData, UserModel } from '@/interfaces/apiRes
 import myLocalStore from '@/composables/myLocalStore';
 import router from '@/router';
 import myCaptcha from '@/composables/myCaptcha';
+import dayjs from 'dayjs';
 
 export default () => {
   const { showCaptcha } = myCaptcha();
@@ -58,6 +59,14 @@ export default () => {
       method: 'POST',
       data: { phone },
     });
+    // 把发送时间存入本地存储
+    myLocalStore().set('codeSendTime', dayjs());
+  };
+
+  // 发送验证码与当前时间得差值秒数
+  const diffSendTime = () => {
+    const time = myLocalStore().get('codeSendTime', dayjs());
+    return time ? 60 - dayjs().diff(time, 'second') : -1;
   };
 
   const register = async (data: any) => {
@@ -68,5 +77,5 @@ export default () => {
     });
   };
 
-  return { form, login, isSuperAdmin, logout, isLogin, getRegisterCode, register };
+  return { form, login, isSuperAdmin, logout, isLogin, getRegisterCode, register, diffSendTime };
 };
