@@ -46,7 +46,7 @@ export default class Axios {
         }
         if (this.options.clearValidateError) errorsStore().resetError();
         config.headers.Accept = 'application/json';
-        // config.headers.Authorization = `Bearer ${storage.get('token')}`;
+        config.headers.Authorization = `Bearer ${storage.get('token')}`;
         return config;
       },
       (error: any) => {
@@ -86,13 +86,10 @@ export default class Axios {
           this.loading = undefined;
         }
         this.options = { loading: true, message: true, clearValidateError: true };
-        console.log('error', error);
-
         const {
           response: { status, data },
         } = error;
         const message = data.error ?? data.message;
-
         switch (status) {
           case 401:
             // 未认证
