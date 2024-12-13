@@ -43,7 +43,7 @@
           />
         </div>
         <error-alert name="password_confirmation" />
-        <captcha-code v-model="form.code" :phone="form.phone" />
+        <captcha-code v-model="form.code" :phone="form.phone" type="register" />
         <div class="mt-8 flex justify-center text-lg text-black">
           <el-button @click="onSubmit" round type="success" size="large">
             <icon-user class="mr-2" />

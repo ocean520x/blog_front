@@ -63,9 +63,19 @@ export default () => {
     myLocalStore().set('codeSendTime', dayjs());
   };
 
+  const getRePasswordCode = async (phone: any) => {
+    await myAxios.request<ApiData<{ code: string }>>({
+      url: 'send/repassword_code',
+      method: 'POST',
+      data: { phone },
+    });
+    // 把发送时间存入本地存储
+    myLocalStore().set('codeSendTime', dayjs());
+  };
+
   // 发送验证码与当前时间得差值秒数
   const diffSendTime = () => {
-    const time = myLocalStore().get('codeSendTime', dayjs());
+    const time = myLocalStore().get('codeSendTime');
     return time ? 60 - dayjs().diff(time, 'second') : -1;
   };
 
@@ -77,5 +87,24 @@ export default () => {
     });
   };
 
-  return { form, login, isSuperAdmin, logout, isLogin, getRegisterCode, register, diffSendTime };
+  const rePassword = async (data: any) => {
+    await myAxios.request<ApiData<RegisterData>>({
+      url: 'auth/repassword',
+      method: 'PUT',
+      data,
+    });
+  };
+
+  return {
+    form,
+    login,
+    isSuperAdmin,
+    logout,
+    isLogin,
+    getRegisterCode,
+    register,
+    diffSendTime,
+    getRePasswordCode,
+    rePassword,
+  };
 };
