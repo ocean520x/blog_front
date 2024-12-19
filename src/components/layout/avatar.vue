@@ -9,7 +9,6 @@ const props = withDefaults(defineProps<{ backgroundColor?: string }>(), {
 const show = ref(false);
 const isFullScreen = ref<boolean>(false);
 const info = ref<UserModel>(myLocalStore().get('userInfo'));
-
 const toggleFullScreen = () => {
   isFullScreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   isFullScreen.value = !isFullScreen.value;

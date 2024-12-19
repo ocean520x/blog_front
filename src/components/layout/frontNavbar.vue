@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import myAuth from '@/composables/myAuth.js';
+</script>
 
 <template>
   <main class="bg-slate-800">
@@ -11,7 +13,12 @@
       </div>
 
       <div>
-        <layout-avatar background-color="#726e6e" />
+        <template v-if="myAuth().isLogin()">
+          <layout-avatar background-color="#726e6e" />
+        </template>
+        <template v-else>
+          <el-button type="success"><icon-me />&nbsp;登陆/注册</el-button>
+        </template>
       </div>
     </section>
   </main>
