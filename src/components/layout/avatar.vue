@@ -3,10 +3,13 @@ import { ref } from 'vue';
 import myLocalStore from '@/composables/myLocalStore';
 import { UserModel } from '@/interfaces/apiResponse';
 import myAuth from '@/composables/myAuth';
-
+const props = withDefaults(defineProps<{ backgroundColor?: string }>(), {
+  backgroundColor: 'white',
+});
 const show = ref(false);
 const isFullScreen = ref<boolean>(false);
-const info: UserModel = myLocalStore().get('userInfo');
+const info = ref<UserModel>(myLocalStore().get('userInfo'));
+
 const toggleFullScreen = () => {
   isFullScreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   isFullScreen.value = !isFullScreen.value;
@@ -14,6 +17,11 @@ const toggleFullScreen = () => {
 
 const handleFullScreenChange = () => {
   isFullScreen.value = document.fullscreenElement !== null;
+};
+
+const logout = () => {
+  myAuth().logout();
+  info.value = null;
 };
 
 onMounted(() => {
@@ -36,12 +44,14 @@ onUnmounted(() => {
     </div>
     <div
       v-show="show"
-      class="flex flex-col absolute left-6 px-1 py-2 z-50 bg-white border border-slate-400 shadow rounded"
+      :style="{ backgroundColor: backgroundColor }"
+      class="flex flex-col absolute left-6 px-1 py-2 z-50 border border-slate-400 shadow rounded"
     >
       <span class="span-item">个人中心</span>
       <span class="span-item">设置头像</span>
       <span class="span-item">重置密码</span>
-      <span class="span-item" @click="myAuth().logout">退出登录</span>
+      <router-link v-if="myAuth().isSuperAdmin()" :to="{ name: 'admin' }" class="span-item">进入后台</router-link>
+      <span class="span-item" @click="logout">退出登录</span>
     </div>
   </div>
 </template>
