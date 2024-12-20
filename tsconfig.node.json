@@ -1,6 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "module": "es2022",             // 支持顶级 await
+    "target": "es2022",             // 支持顶级 await
     "composite": true
   }
 }

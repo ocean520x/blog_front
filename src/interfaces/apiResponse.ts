@@ -1,3 +1,5 @@
+import { IconType } from '@icon-park/vue-next/es/all';
+
 export interface UserModel {
   updated_at: string;
   name: string;
@@ -8,6 +10,7 @@ export interface UserModel {
   email: string;
   is_super_admin: string;
 }
+
 export interface LoginData {
   user: UserModel;
   token: string;
@@ -29,4 +32,13 @@ export interface MyCaptcha {
   img: string;
   sensitive: boolean;
   key: string;
+}
+
+export interface MyCategory {
+  updated_at: string;
+  icon: IconType;
+  created_at: string;
+  id: number;
+  sort: number;
+  title: string;
 }

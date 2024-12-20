@@ -28,6 +28,7 @@ declare global {
   const myAuth: typeof import('../src/composables/myAuth')['default']
   const myCaptcha: typeof import('../src/composables/myCaptcha')['default']
   const myLocalStore: typeof import('../src/composables/myLocalStore')['default']
+  const myTopic: typeof import('../src/composables/myTopic')['default']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onBeforeMount: typeof import('vue')['onBeforeMount']
@@ -108,6 +109,7 @@ declare module 'vue' {
     readonly myAuth: UnwrapRef<typeof import('../src/composables/myAuth')['default']>
     readonly myCaptcha: UnwrapRef<typeof import('../src/composables/myCaptcha')['default']>
     readonly myLocalStore: UnwrapRef<typeof import('../src/composables/myLocalStore')['default']>
+    readonly myTopic: UnwrapRef<typeof import('../src/composables/myTopic')['default']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onBeforeMount: UnwrapRef<typeof import('vue')['onBeforeMount']>

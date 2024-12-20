@@ -1,6 +1,8 @@
 {
   "files": [],
   "compilerOptions": {
+    "module": "es2022",             // 支持顶级 await
+    "target": "es2022",             // 支持顶级 await
     "jsx":"preserve",
     "baseUrl": "./",
     "paths": {
