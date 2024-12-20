@@ -1,6 +1,10 @@
 <template>
   <front-navbar />
-  <router-view />
+  <router-view>
+    <template #default="{ Component }">
+      <component :is="Component" class="w-full xl:w-web mx-auto" />
+    </template>
+  </router-view>
 </template>
 
 <script setup lang="ts">
