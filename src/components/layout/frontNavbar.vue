@@ -22,10 +22,10 @@ getLoginState();
 
       <div>
         <template v-if="isLogin">
-          <layout-avatar background-color="#726e6e" @logout="getLoginState" />
+          <layout-avatar background-color="#726e6e" @logout="getLoginState" type="front" />
         </template>
         <template v-else>
-          <el-button type="success">
+          <el-button @click="$router.push({ name: 'login' })" type="success" size="small">
             <template #icon>
               <icon-me />
             </template>

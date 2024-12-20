@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import myLocalStore from '@/composables/myLocalStore';
 import { UserModel } from '@/interfaces/apiResponse';
 import myAuth from '@/composables/myAuth';
-const props = withDefaults(defineProps<{ backgroundColor?: string }>(), {
+const props = withDefaults(defineProps<{ backgroundColor?: string; type: 'front' | 'admin' }>(), {
   backgroundColor: 'white',
 });
 const emit = defineEmits(['logout']);
@@ -51,7 +51,9 @@ onUnmounted(() => {
       <span class="span-item">个人中心</span>
       <span class="span-item">设置头像</span>
       <span class="span-item">重置密码</span>
-      <router-link v-if="myAuth().isSuperAdmin()" :to="{ name: 'admin' }" class="span-item">进入后台</router-link>
+      <router-link v-if="myAuth().isSuperAdmin() && type != 'admin'" :to="{ name: 'admin' }" class="span-item"
+        >进入后台</router-link
+      >
       <span class="span-item" @click="logout">退出登录</span>
     </div>
   </div>

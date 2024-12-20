@@ -14,7 +14,7 @@ import showHideMenu from '@/store/showHideMenu';
       <icon-align-right-one fill="#7ed321" class="cursor-pointer" @click="showHideMenu().toggle()" v-else />
       <layout-breadcrumb-route />
     </div>
-    <layout-avatar />
+    <layout-avatar type="admin" />
   </div>
 </template>
 
