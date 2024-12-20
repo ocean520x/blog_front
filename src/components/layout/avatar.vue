@@ -6,6 +6,7 @@ import myAuth from '@/composables/myAuth';
 const props = withDefaults(defineProps<{ backgroundColor?: string }>(), {
   backgroundColor: 'white',
 });
+const emit = defineEmits(['logout']);
 const show = ref(false);
 const isFullScreen = ref<boolean>(false);
 const info = ref<UserModel>(myLocalStore().get('userInfo'));
@@ -18,9 +19,10 @@ const handleFullScreenChange = () => {
   isFullScreen.value = document.fullscreenElement !== null;
 };
 
-const logout = () => {
-  myAuth().logout();
+const logout = async () => {
+  await myAuth().logout();
   info.value = null;
+  emit('logout');
 };
 
 onMounted(() => {

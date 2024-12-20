@@ -50,7 +50,7 @@ export default () => {
     });
     myLocalStore().remove('token');
     myLocalStore().remove('userInfo');
-    router.push({ name: 'home' });
+    await router.push({ name: 'home' });
   };
 
   const getRegisterCode = async (phone: any) => {

@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import myAuth from '@/composables/myAuth.js';
+
+const isLogin = ref(false);
+
+function getLoginState() {
+  isLogin.value = myAuth().isLogin();
+}
+
+getLoginState();
 </script>
 
 <template>
@@ -13,11 +21,16 @@ import myAuth from '@/composables/myAuth.js';
       </div>
 
       <div>
-        <template v-if="myAuth().isLogin()">
-          <layout-avatar background-color="#726e6e" />
+        <template v-if="isLogin">
+          <layout-avatar background-color="#726e6e" @logout="getLoginState" />
         </template>
         <template v-else>
-          <el-button type="success"><icon-me />&nbsp;登陆/注册</el-button>
+          <el-button type="success">
+            <template #icon>
+              <icon-me />
+            </template>
+            登陆/注册
+          </el-button>
         </template>
       </div>
     </section>
