@@ -1,9 +1,10 @@
 import { ref } from 'vue';
-import { ApiData, MyCategory } from '@/interfaces/apiResponse';
+import { ApiData, MyCategory, MyTopic, PageData } from '@/interfaces/apiResponse';
 import myAxios from '@/plugins/axios';
 
 export default () => {
   const categories = ref<MyCategory[]>();
+  const topics = ref<PageData<MyTopic>>();
 
   async function getCategories() {
     const res = await myAxios.request<ApiData<MyCategory[]>>({
@@ -12,5 +13,14 @@ export default () => {
     categories.value = res.data;
   }
 
-  return { categories, getCategories };
+  async function getTopics(page = 1, params = {}) {
+    const paramsStr = Object.entries(params)
+      .map((e) => e.join('='))
+      .join('&');
+    topics.value = await myAxios.request<PageData<MyTopic>>({
+      url: `topic?page=${page}&` + paramsStr,
+    });
+  }
+
+  return { categories, getCategories, topics, getTopics };
 };

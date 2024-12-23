@@ -28,6 +28,21 @@ export interface ApiData<T> {
   success: boolean;
 }
 
+export interface PageData<T> {
+  data: T[];
+  links: { first: string; last: string; prev?: any; next?: any };
+  meta: {
+    current_page: number;
+    from: number;
+    last_page: number;
+    links: { url?: string; label: string; active: boolean }[];
+    path: string;
+    per_page: number;
+    to: number;
+    total: number;
+  };
+}
+
 export interface MyCaptcha {
   img: string;
   sensitive: boolean;
@@ -41,4 +56,18 @@ export interface MyCategory {
   id: number;
   sort: number;
   title: string;
+}
+
+export interface MyTopic {
+  category_id: number;
+  updated_at: string;
+  user_id: number;
+  is_hot: string;
+  created_at: string;
+  id: number;
+  sort: number;
+  title: string;
+  category: MyCategory;
+  user: UserModel;
+  content: string;
 }
