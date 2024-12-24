@@ -22,5 +22,14 @@ export default () => {
     });
   }
 
-  return { categories, getCategories, topics, getTopics };
+  async function getTopicsByCategory(c_id: any, page = 1, params = {}) {
+    const paramsStr = Object.entries(params)
+      .map((e) => e.join('='))
+      .join('&');
+    topics.value = await myAxios.request<PageData<MyTopic>>({
+      url: `per_category/${c_id}&` + paramsStr,
+    });
+  }
+
+  return { categories, getCategories, topics, getTopics, getTopicsByCategory };
 };
