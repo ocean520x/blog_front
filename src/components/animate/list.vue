@@ -2,17 +2,21 @@
 import { RendererElement } from 'vue';
 import gsap from 'gsap';
 
-const props = withDefaults(defineProps<
+const props = withDefaults(
+  defineProps<{
+    tag?: string;
+    duration?: number;
+    delay?: number;
+  }>(),
   {
-    duration?: number,
-    delay?: number
-  }>(), {
-  duration: 5,
-  delay: .2
-});
+    tag: 'ul',
+    duration: 2,
+    delay: 0.5,
+  },
+);
 const listBeforeEnter = (el: RendererElement) => {
   gsap.set(el, {
-    opacity: 0
+    opacity: 0,
   });
 };
 
@@ -20,18 +24,15 @@ const listEnter = (el: RendererElement) => {
   gsap.to(el, {
     opacity: 1,
     duration: props.duration,
-    delay: el.dataset.index * props.delay
+    delay: el.dataset.index * props.delay,
   });
 };
 </script>
 
 <template>
-  <TransitionGroup tag="ul" class="w-[720px] relative" name="list" appear @before-enter="listBeforeEnter"
-                   @enter="listEnter">
+  <TransitionGroup :tag="tag" class="relative" name="list" appear @before-enter="listBeforeEnter" @enter="listEnter">
     <slot />
   </TransitionGroup>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
