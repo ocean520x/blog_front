@@ -3,6 +3,7 @@
   "compilerOptions":{
     "module": "es2022",             // 支持顶级 await
     "target": "es2022",             // 支持顶级 await
-    "composite":true
+    "composite":true,
+    "moduleResolution": "bundler"
   }
 }
