@@ -11,5 +11,13 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        '.el-button': {
+          'background-color': 'var(--el-button-bg-color,val(--el-color-white))',
+        },
+      });
+    },
+  ],
 };
