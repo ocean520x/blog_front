@@ -45,7 +45,7 @@ watch(
           :data-index="index"
           v-for="(item, index) in topics?.data"
           :key="item.id"
-          class="border border-slate-300 p-2 hover:bg-green-200 hover:cursor-pointer duration-300 shadow flex items-center justify-start mt-2 rounded text-slate-600 gap-2"
+          class="border border-slate-300 p-2 hover:bg-green-200 hover:cursor-pointer duration-500 shadow flex items-center justify-start mt-2 rounded text-slate-600 gap-2 hover:scale-105"
         >
           <el-avatar shape="square" :size="50" :src="item.user.avatar" />
           <span>{{ item.title }}--{{ item.category.title }}</span>
