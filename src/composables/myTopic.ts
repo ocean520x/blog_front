@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { ApiData, MyCategory, MyTopic, PageData } from '@/interfaces/apiResponse';
 import myAxios from '@/plugins/axios';
+import myLocalStore from '@/composables/myLocalStore';
 
 export default () => {
   const categories = ref<MyCategory[]>();
@@ -22,12 +23,13 @@ export default () => {
     });
   }
 
-  async function getTopicsByCategory(c_id: any, page = 1, params = {}) {
+  async function getTopicsByCategory(page = 1, params = {}) {
+    const c_id = myLocalStore().get('c_id');
     const paramsStr = Object.entries(params)
       .map((e) => e.join('='))
       .join('&');
     topics.value = await myAxios.request<PageData<MyTopic>>({
-      url: `per_category/${c_id}&` + paramsStr,
+      url: `per_category/${c_id}?page=${page}&` + paramsStr,
     });
   }
 

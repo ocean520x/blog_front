@@ -32,6 +32,7 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
+    ElPagination: typeof import('element-plus/es')['ElPagination']
     Error404: typeof import('./../src/views/error/404.vue')['default']
     ErrorAlert: typeof import('./../src/components/error/alert.vue')['default']
     ErrorAlertError: typeof import('./../src/components/errorAlert/error.vue')['default']

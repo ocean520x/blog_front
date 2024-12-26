@@ -3,6 +3,7 @@ import myTopic from '@/composables/myTopic';
 import * as Icon from '@icon-park/vue-next';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
+import myLocalStore from '@/composables/myLocalStore';
 
 const { categories, getCategories, topics, getTopics, getTopicsByCategory } = myTopic();
 await getCategories();
@@ -12,7 +13,8 @@ watch(
   async () => {
     const c_id = route.params?.c_id;
     if (c_id) {
-      await getTopicsByCategory(c_id);
+      myLocalStore().set('c_id', c_id);
+      await getTopicsByCategory();
     } else {
       await getTopics();
     }
@@ -43,12 +45,33 @@ watch(
           :data-index="index"
           v-for="(item, index) in topics?.data"
           :key="item.id"
-          class="p-2 hover:bg-green-200 hover:cursor-pointer duration-300 shadow flex items-center justify-start mt-2 rounded text-slate-600 gap-2"
+          class="border border-slate-300 p-2 hover:bg-green-200 hover:cursor-pointer duration-300 shadow flex items-center justify-start mt-2 rounded text-slate-600 gap-2"
         >
           <el-avatar shape="square" :size="50" :src="item.user.avatar" />
           <span>{{ item.title }}--{{ item.category.title }}</span>
         </li>
       </animate-list>
+      <div class="p-3 mt-3 flex justify-end" v-if="route.params?.c_id">
+        <el-pagination
+          @current-change="getTopicsByCategory"
+          :hide-on-single-page="true"
+          :page-size="topics?.meta.per_page"
+          :total="topics?.meta.total"
+          background
+          layout="prev, pager, next,total"
+        />
+      </div>
+
+      <div class="p-3 mt-3 flex justify-end" v-else>
+        <el-pagination
+          @current-change="getTopics"
+          :hide-on-single-page="true"
+          :page-size="topics?.meta.per_page"
+          :total="topics?.meta.total"
+          background
+          layout="prev, pager, next,total"
+        />
+      </div>
     </section>
   </main>
 </template>

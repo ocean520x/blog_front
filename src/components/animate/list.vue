@@ -10,8 +10,8 @@ const props = withDefaults(
   }>(),
   {
     tag: 'ul',
-    duration: 2,
-    delay: 0.5,
+    duration: 1,
+    delay: 0.3,
   },
 );
 const listBeforeEnter = (el: RendererElement) => {
