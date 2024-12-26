@@ -26,21 +26,22 @@ watch(
 <template>
   <main class="">
     <section class="grid grid-cols-6 gap-2 border shadow p-3 text-sm text-slate-600" v-if="categories">
-      <router-link
-        :to="{ name: 'per.category', params: { c_id: item.id } }"
-        class="flex justify-center items-center gap-1 hover:cursor-pointer hover:text-green-500 duration-300"
-        v-for="(item, index) in categories"
-        :key="index"
-      >
-        <component :is="Icon[item.icon!]" />
-        <span>{{ item.title }}</span>
-      </router-link>
+      <div v-for="(item, index) in categories" :key="index" class="flex items-center justify-center">
+        <router-link
+          :to="{ name: 'per.category', params: { c_id: item.id } }"
+          :class="{ active: (route as any).params?.c_id == item.id }"
+          class="w-2/3 py-1 flex justify-center items-center gap-1 hover:cursor-pointer hover:text-green-500 duration-300"
+        >
+          <component :is="Icon[item.icon!]" />
+          <span>{{ item.title }}</span>
+        </router-link>
+      </div>
     </section>
-    <section class="">
+    <section class="min-h-screen">
       <animate-list tag="ul">
         <li
           :data-index="index"
-          v-for="(item, index) in topics.data"
+          v-for="(item, index) in topics?.data"
           :key="item.id"
           class="p-2 hover:bg-green-200 hover:cursor-pointer duration-300 shadow flex items-center justify-start mt-2 rounded text-slate-600 gap-2"
         >
@@ -52,4 +53,8 @@ watch(
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+a.active {
+  @apply bg-green-400 rounded text-slate-100;
+}
+</style>
