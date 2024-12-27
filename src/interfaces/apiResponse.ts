@@ -71,3 +71,13 @@ export interface MyTopic {
   user: UserModel;
   content: string;
 }
+
+export interface MyConfig {
+  site_name?: string;
+  copyright?: string;
+  address?: string;
+  ICP?: string;
+  tel?: string;
+  wechat_pay?: string;
+  aliyun_pay?: string;
+}

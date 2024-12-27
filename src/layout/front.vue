@@ -6,11 +6,13 @@
         <component :is="Component" class="w-full xl:w-web mx-auto mt-[60px]" />
       </template>
     </router-view>
+    <front-footer />
   </main>
 </template>
 
 <script setup lang="ts">
 import FrontNavbar from '@/components/layout/frontNavbar.vue';
+import FrontFooter from '@/components/layout/frontFooter.vue';
 </script>
 
 <style scoped></style>
