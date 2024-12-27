@@ -53,6 +53,7 @@ watch(
       </animate-list>
       <div class="p-3 mt-3 flex justify-end" v-if="route.params?.c_id">
         <el-pagination
+          :current-page="topics?.meta.current_page"
           @current-change="getTopicsByCategory"
           :hide-on-single-page="true"
           :page-size="topics?.meta.per_page"
@@ -64,6 +65,7 @@ watch(
 
       <div class="p-3 mt-3 flex justify-end" v-else>
         <el-pagination
+          :current-page="topics?.meta.current_page"
           @current-change="getTopics"
           :hide-on-single-page="true"
           :page-size="topics?.meta.per_page"

@@ -6,6 +6,7 @@ import myLocalStore from '@/composables/myLocalStore';
 export default () => {
   const categories = ref<MyCategory[]>();
   const topics = ref<PageData<MyTopic>>();
+  const topicDetail = ref<MyTopic>();
 
   async function getCategories() {
     const res = await myAxios.request<ApiData<MyCategory[]>>({
@@ -33,5 +34,12 @@ export default () => {
     });
   }
 
-  return { categories, getCategories, topics, getTopics, getTopicsByCategory };
+  async function getTopicDetail(t_id: any) {
+    const res = await myAxios.request<ApiData<MyTopic>>({
+      url: `topic/show/${t_id}`,
+    });
+    topicDetail.value = res.data;
+  }
+
+  return { categories, getCategories, topics, getTopics, getTopicsByCategory, topicDetail, getTopicDetail };
 };
