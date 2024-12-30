@@ -4,6 +4,7 @@ import * as Icon from '@icon-park/vue-next';
 import { useRoute } from 'vue-router';
 import { watch } from 'vue';
 import myLocalStore from '@/composables/myLocalStore';
+import dayjs from 'dayjs';
 
 const { categories, getCategories, topics, getTopics, getTopicsByCategory } = myTopic();
 await getCategories();
@@ -41,15 +42,7 @@ watch(
     </section>
     <section class="min-h-screen">
       <animate-list tag="ul">
-        <li
-          :data-index="index"
-          v-for="(item, index) in topics?.data"
-          :key="item.id"
-          class="border border-slate-300 p-2 hover:bg-green-200 hover:cursor-pointer duration-500 shadow flex items-center justify-start mt-2 rounded text-slate-600 gap-2 hover:scale-105"
-        >
-          <el-avatar shape="square" :size="50" :src="item.user.avatar" />
-          <span>{{ item.title }}--{{ item.category.title }}</span>
-        </li>
+        <topic-item :data-index="index" v-for="(item, index) in topics?.data" :key="item.id" :item="item" />
       </animate-list>
       <div class="p-3 mt-3 flex justify-end" v-if="route.params?.c_id">
         <el-pagination
