@@ -20,7 +20,10 @@ getLoginState();
         </router-link>
       </div>
 
-      <div>
+      <div class="flex items-center gap-2">
+        <router-link to="/">
+          <icon-home theme="outline" size="22" fill="#7ed321" />
+        </router-link>
         <template v-if="isLogin">
           <layout-avatar background-color="#726e6e" @logout="getLoginState" type="front" />
         </template>
