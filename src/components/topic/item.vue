@@ -17,7 +17,11 @@ const { item } = defineProps<{
         class="text-xs text-cyan-600 hover:text-cyan-500 duration-300 p-1 rounded-sm border border-cyan-600"
         >{{ item.category.title }}</router-link
       >
-      <span>{{ item.title }}</span>
+      <router-link
+        :to="{ name: 'front.topic.show', params: { t_id: item.id } }"
+        class="hover:underline hover:text-cyan-600 duration-300"
+        >{{ item.title }}</router-link
+      >
     </div>
     <div class="col-span-2 flex items-center justify-center text-sm text-slate-600 gap-1">
       <icon-stopwatch-start theme="outline" size="18" fill="#7ed321" />

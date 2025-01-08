@@ -36,7 +36,7 @@ export default () => {
 
   async function getTopicDetail(t_id: any) {
     const res = await myAxios.request<ApiData<MyTopic>>({
-      url: `topic/show/${t_id}`,
+      url: `topic/${t_id}`,
     });
     topicDetail.value = res.data;
   }
