@@ -11,7 +11,15 @@ const { item } = defineProps<{
     class="border border-slate-300 p-2 hover:bg-green-200 hover:cursor-pointer duration-500 shadow mt-2 rounded text-slate-600 gap-2 hover:scale-105 grid grid-cols-12"
   >
     <div class="col-span-10 flex items-center justify-start gap-2">
-      <el-avatar shape="square" :size="50" :src="item.user.avatar" />
+      <div class="flex flex-col gap-1">
+        <el-avatar shape="square" :size="50" :src="item.user.avatar" />
+        <div
+          class="flex items-center justify-center gap-1 text-xs text-orange-600 hover:text-orange-500 hover:underline duration-300"
+        >
+          <icon-me fill="#7ed321" />
+          <router-link to="/">{{ item.user.name }}</router-link>
+        </div>
+      </div>
       <router-link
         :to="{ name: 'per.category', params: { c_id: item.category.id } }"
         class="text-xs text-cyan-600 hover:text-cyan-500 duration-300 p-1 rounded-sm border border-cyan-600"
