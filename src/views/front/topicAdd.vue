@@ -45,12 +45,7 @@ const clearError = (name: string) => {
           <error-alert name="title" />
         </el-form-item>
         <el-form-item label="帖子内容">
-          <el-input
-            v-model="form.content"
-            @focus="clearError('content')"
-            type="textarea"
-            placeholder="请输入帖子内容"
-          />
+          <markdown-editor v-model="form.content" />
           <error-alert name="content" />
         </el-form-item>
         <el-form-item>
