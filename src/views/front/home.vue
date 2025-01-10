@@ -40,6 +40,12 @@ watch(
         </router-link>
       </div>
     </section>
+    <section class="flex items-center justify-end pt-2">
+      <el-button @click="$router.push({ name: 'front.topic.add' })" type="primary">
+        <icon-add-picture theme="outline" size="20" />&nbsp;
+        <span>发布帖子</span>
+      </el-button>
+    </section>
     <section class="min-h-screen">
       <animate-list tag="ul">
         <topic-item :data-index="index" v-for="(item, index) in topics?.data" :key="item.id" :item="item" />

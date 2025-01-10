@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import myTopic from '@/composables/myTopic';
+import myAuth from '@/composables/myAuth';
+import myLocalStore from '@/composables/myLocalStore';
 import { useRoute } from 'vue-router';
 import dayjs from 'dayjs';
+const { isLogin, isSuperAdmin } = myAuth();
+const userInfo = myLocalStore().get('userInfo');
 const route = useRoute();
 const t_id = route.params?.t_id;
 const { topicDetail, getTopicDetail } = myTopic();
@@ -21,7 +25,21 @@ await getTopicDetail(t_id);
         <span>{{ dayjs(topicDetail.created_at).fromNow() }}</span>
       </div>
     </section>
-    <section class="border border-slate-300 rounded p-3">
+    <section class="pb-3">
+      <el-button-group size="small" class="">
+        <el-button v-if="isLogin()" @click="$router.push({ name: 'front.topic.add' })" type="success"
+          ><icon-add />&nbsp;新增</el-button
+        >
+        <el-button v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id" type="primary"
+          ><icon-editor />&nbsp;编辑</el-button
+        >
+        <el-button v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id" type="danger"
+          ><icon-delete />&nbsp;删除</el-button
+        >
+        <el-button @click="$router.push({ name: 'home' })" type="warning"><icon-back />&nbsp;返回</el-button>
+      </el-button-group>
+    </section>
+    <section class="w-full border border-slate-300 rounded p-3">
       {{ topicDetail.content }}
     </section>
   </main>

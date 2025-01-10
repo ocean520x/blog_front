@@ -7,6 +7,11 @@ export default () => {
   const categories = ref<MyCategory[]>();
   const topics = ref<PageData<MyTopic>>();
   const topicDetail = ref<MyTopic>();
+  const form = reactive({
+    title: '',
+    content: '',
+    category_id: '',
+  });
 
   async function getCategories() {
     const res = await myAxios.request<ApiData<MyCategory[]>>({
@@ -41,5 +46,23 @@ export default () => {
     topicDetail.value = res.data;
   }
 
-  return { categories, getCategories, topics, getTopics, getTopicsByCategory, topicDetail, getTopicDetail };
+  async function addTopic(data: any) {
+    return await myAxios.request<ApiData<MyTopic>>({
+      url: `topic`,
+      method: 'POST',
+      data,
+    });
+  }
+
+  return {
+    categories,
+    getCategories,
+    topics,
+    getTopics,
+    getTopicsByCategory,
+    topicDetail,
+    getTopicDetail,
+    form,
+    addTopic,
+  };
 };

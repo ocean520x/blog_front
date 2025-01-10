@@ -46,7 +46,7 @@ onUnmounted(() => {
     <div
       v-show="show"
       :style="{ backgroundColor: backgroundColor }"
-      class="flex flex-col absolute left-6 px-1 py-2 z-50 border border-slate-400 shadow rounded"
+      class="flex flex-col absolute top-[30px] left-6 px-1 py-2 z-50 border border-slate-400 shadow rounded"
     >
       <span class="span-item">个人中心</span>
       <span class="span-item">设置头像</span>

@@ -28,7 +28,7 @@ const { item } = defineProps<{
       <router-link
         :to="{ name: 'front.topic.show', params: { t_id: item.id } }"
         class="hover:underline hover:text-cyan-600 duration-300"
-        >{{ item.title }}</router-link
+        >{{ item.id }}-{{ item.user_id }}-{{ item.title }}</router-link
       >
     </div>
     <div class="col-span-2 flex items-center justify-center text-sm text-slate-600 gap-1">
