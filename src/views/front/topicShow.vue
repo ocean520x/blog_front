@@ -16,7 +16,7 @@ await getTopicDetail(t_id);
 <template>
   <main class="flex flex-col justify-start items-center min-h-screen" v-if="topicDetail">
     <h4 class="font-bold text-slate-700 p-3 text-[18px]">{{ topicDetail.title }}</h4>
-    <section class="flex items-center justify-center gap-5">
+    <section class="flex items-center justify-center gap-2">
       <div class="flex gap-1 text-xs items-center p-3 text-slate-500">
         <icon-me />
         <span>{{ topicDetail.user.name }}</span>
@@ -24,6 +24,14 @@ await getTopicDetail(t_id);
       <div class="flex gap-1 text-xs items-center p-3 text-slate-500">
         <icon-stopwatch-start theme="outline" size="18" fill="#7ed321" />
         <span>{{ dayjs(topicDetail.created_at).fromNow() }}</span>
+      </div>
+      <div class="flex gap-1 text-xs items-center p-3 text-slate-500">
+        <icon-all-application />
+        <router-link
+          :to="{ name: 'per.category', params: { c_id: topicDetail.category.id } }"
+          class="hover:text-green-600"
+          >{{ topicDetail.category.title }}</router-link
+        >
       </div>
     </section>
     <section class="pb-3">
@@ -49,6 +57,7 @@ await getTopicDetail(t_id);
     <section class="w-full border border-slate-300 rounded p-3">
       <markdown-preview :text="topicDetail.html" />
     </section>
+    <comment-list :t_id="topicDetail.id" />
   </main>
 </template>
 

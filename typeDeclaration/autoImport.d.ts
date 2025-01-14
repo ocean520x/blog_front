@@ -28,6 +28,7 @@ declare global {
   const menuStore: typeof import('../src/store/menuStore')['default']
   const myAuth: typeof import('../src/composables/myAuth')['default']
   const myCaptcha: typeof import('../src/composables/myCaptcha')['default']
+  const myComment: typeof import('../src/composables/myComment')['default']
   const myConfig: typeof import('../src/composables/myConfig')['default']
   const myLocalStore: typeof import('../src/composables/myLocalStore')['default']
   const myTopic: typeof import('../src/composables/myTopic')['default']
@@ -111,6 +112,7 @@ declare module 'vue' {
     readonly menuStore: UnwrapRef<typeof import('../src/store/menuStore')['default']>
     readonly myAuth: UnwrapRef<typeof import('../src/composables/myAuth')['default']>
     readonly myCaptcha: UnwrapRef<typeof import('../src/composables/myCaptcha')['default']>
+    readonly myComment: UnwrapRef<typeof import('../src/composables/myComment')['default']>
     readonly myConfig: UnwrapRef<typeof import('../src/composables/myConfig')['default']>
     readonly myLocalStore: UnwrapRef<typeof import('../src/composables/myLocalStore')['default']>
     readonly myTopic: UnwrapRef<typeof import('../src/composables/myTopic')['default']>

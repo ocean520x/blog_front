@@ -82,3 +82,23 @@ export interface MyConfig {
   wechat_pay?: string;
   aliyun_pay?: string;
 }
+
+interface BaseComment {
+  id: number;
+  user_id: number;
+  topic_id: number;
+  reply_comment_id?: number;
+  reply_user_id?: number;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  topic?: MyTopic;
+  user: UserModel;
+  html: string;
+}
+
+export interface MyComment extends BaseComment {
+  reply_comments?: BaseComment[];
+  belong_to_comment?: BaseComment;
+  reply_user?: UserModel;
+}
