@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import myTopic from '@/composables/myTopic';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import errorsStore from '@/store/errorsStore';
 const router = useRouter();
-const { form, addTopic, getCategories, categories } = myTopic();
+const route = useRoute();
+const t_id = route.params?.t_id;
+const { topicDetail, editTopic, getTopicDetail, getCategories, categories } = myTopic();
+await getTopicDetail(t_id);
 await getCategories();
-const add = async () => {
-  const res = await addTopic(form);
+const edit = async () => {
+  const res = await editTopic(topicDetail.value);
   router.push({ name: 'front.topic.show', params: { t_id: res.data.id } });
 };
 const clearError = (name: string) => {
@@ -19,14 +22,14 @@ const clearError = (name: string) => {
     <el-card shadow="hover">
       <template #header>
         <div class="flex items-center justify-start text-slate-600">
-          <icon-add-picture theme="outline" size="20" />&nbsp;
-          <span>发布帖子</span>
+          <icon-editor-picture theme="outline" size="20" />&nbsp;
+          <span>编辑帖子</span>
         </div>
       </template>
       <el-form label-width="120px">
         <el-form-item v-if="categories" label="帖子大类">
           <el-select
-            v-model="form.category_id"
+            v-model="topicDetail.category_id"
             @change="clearError('category_id')"
             placeholder="请选择帖子大类"
             style="width: 180px"
@@ -34,6 +37,7 @@ const clearError = (name: string) => {
             <el-option
               v-for="(category, index) in categories"
               :key="index"
+              :selected="category.id === topicDetail.category.id"
               :label="category.title"
               :value="category.id"
             />
@@ -41,15 +45,15 @@ const clearError = (name: string) => {
           <error-alert name="category_id" />
         </el-form-item>
         <el-form-item label="帖子标题">
-          <el-input v-model="form.title" @focus="clearError('title')" placeholder="请输入帖子标题" />
+          <el-input v-model="topicDetail.title" @focus="clearError('title')" placeholder="请输入帖子标题" />
           <error-alert name="title" />
         </el-form-item>
         <el-form-item label="帖子内容">
-          <markdown-editor v-model="form.content" />
+          <markdown-editor v-model="topicDetail.content" />
           <error-alert name="content" />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="add">发布帖子</el-button>
+          <el-button type="primary" @click="edit">确认修改</el-button>
         </el-form-item>
       </el-form>
     </el-card>

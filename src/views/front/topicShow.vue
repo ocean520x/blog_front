@@ -4,6 +4,7 @@ import myAuth from '@/composables/myAuth';
 import myLocalStore from '@/composables/myLocalStore';
 import { useRoute } from 'vue-router';
 import dayjs from 'dayjs';
+import MarkdownPreview from '@/components/markdown/markdownPreview.vue';
 const { isLogin, isSuperAdmin } = myAuth();
 const userInfo = myLocalStore().get('userInfo');
 const route = useRoute();
@@ -30,7 +31,10 @@ await getTopicDetail(t_id);
         <el-button v-if="isLogin()" @click="$router.push({ name: 'front.topic.add' })" type="success"
           ><icon-add />&nbsp;新增</el-button
         >
-        <el-button v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id" type="primary"
+        <el-button
+          v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id"
+          @click="$router.push({ name: 'front.topic.edit', params: { t_id } })"
+          type="primary"
           ><icon-editor />&nbsp;编辑</el-button
         >
         <el-button v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id" type="danger"
@@ -40,7 +44,7 @@ await getTopicDetail(t_id);
       </el-button-group>
     </section>
     <section class="w-full border border-slate-300 rounded p-3">
-      {{ topicDetail.content }}
+      <markdown-preview :text="topicDetail.html" />
     </section>
   </main>
 </template>

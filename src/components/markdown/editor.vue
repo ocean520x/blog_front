@@ -23,8 +23,7 @@ nextTick(() => {
     const editorElement = document.getElementById('editor');
     if (editorElement) {
       observer.disconnect(); // 找到元素后，停止监听
-
-      const markdownObj = new markdownClass('#editor', `${props.height}px`, `${props.placeholder}`);
+      const markdownObj = new markdownClass('#editor', `${props.height}px`, `${props.modelValue}`);
       markdownObj.editor.on('change', (type: string) => {
         const content = type === 'markdown' ? markdownObj.editor.getMarkdown() : markdownObj.editor.getHTML();
         emit('update:modelValue', content);
@@ -43,7 +42,7 @@ nextTick(() => {
 </script>
 
 <template>
-  <div id="editor" class="bg-white rounded"></div>
+  <div id="editor" class="bg-white rounded" />
 </template>
 
 <style scoped></style>

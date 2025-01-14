@@ -70,6 +70,7 @@ export interface MyTopic {
   category: MyCategory;
   user: UserModel;
   content: string;
+  html: string;
 }
 
 export interface MyConfig {

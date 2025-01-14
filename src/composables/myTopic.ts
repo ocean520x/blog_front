@@ -54,6 +54,14 @@ export default () => {
     });
   }
 
+  async function editTopic(data: any) {
+    return await myAxios.request<ApiData<MyTopic>>({
+      url: `topic/${data.id}`,
+      method: 'PUT',
+      data,
+    });
+  }
+
   return {
     categories,
     getCategories,
@@ -64,5 +72,6 @@ export default () => {
     getTopicDetail,
     form,
     addTopic,
+    editTopic,
   };
 };
