@@ -4,7 +4,6 @@ import myLocalStore from '@/composables/myLocalStore';
 import router from '@/router';
 import myCaptcha from '@/composables/myCaptcha';
 import dayjs from 'dayjs';
-
 export default () => {
   const { showCaptcha } = myCaptcha();
   const form = reactive({
@@ -36,7 +35,9 @@ export default () => {
       myLocalStore().set('token', res.data.token);
       myLocalStore().set('userInfo', res.data.user);
       // 是否超级管理员
-      isSuperAdmin() ? router.push({ name: 'admin' }) : router.push({ name: 'home' });
+      // isSuperAdmin() ? router.push({ name: 'admin' }) : router.push({ name: 'home' });
+      const route = router.resolve({ name: 'home' });
+      location.href = route.fullPath;
     } catch (error) {
       await showCaptcha();
     }

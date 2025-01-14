@@ -9,7 +9,7 @@ const { isLogin, isSuperAdmin } = myAuth();
 const userInfo = myLocalStore().get('userInfo');
 const route = useRoute();
 const t_id = route.params?.t_id;
-const { topicDetail, getTopicDetail } = myTopic();
+const { topicDetail, getTopicDetail, delTopic } = myTopic();
 await getTopicDetail(t_id);
 </script>
 
@@ -37,7 +37,10 @@ await getTopicDetail(t_id);
           type="primary"
           ><icon-editor />&nbsp;编辑</el-button
         >
-        <el-button v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id" type="danger"
+        <el-button
+          v-if="isSuperAdmin() || topicDetail.user.id === userInfo?.id"
+          @click="delTopic(topicDetail.id)"
+          type="danger"
           ><icon-delete />&nbsp;删除</el-button
         >
         <el-button @click="$router.push({ name: 'home' })" type="warning"><icon-back />&nbsp;返回</el-button>
