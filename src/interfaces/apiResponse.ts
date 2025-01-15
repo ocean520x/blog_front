@@ -83,8 +83,8 @@ export interface MyConfig {
   aliyun_pay?: string;
 }
 
-interface BaseComment {
-  id: number;
+export interface MyComment {
+  id: number | string;
   user_id: number;
   topic_id: number;
   reply_comment_id?: number;
@@ -95,10 +95,7 @@ interface BaseComment {
   topic?: MyTopic;
   user: UserModel;
   html: string;
-}
-
-export interface MyComment extends BaseComment {
-  reply_comments?: BaseComment[];
-  belong_to_comment?: BaseComment;
   reply_user?: UserModel;
+  reply_comments?: MyComment[];
+  belong_to_comment?: MyComment;
 }

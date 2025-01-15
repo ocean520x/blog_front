@@ -19,5 +19,14 @@ export default () => {
     });
   }
 
-  return { comments, getComments, addComment };
+  async function addReply(data: any) {
+    const res = await myAxios.request<ApiData<MyComment>>({
+      url: `reply/comment/${data.topic_id}/${data.comment_id}`,
+      method: 'POST',
+      data,
+    });
+    return res.data;
+  }
+
+  return { comments, getComments, addComment, addReply };
 };

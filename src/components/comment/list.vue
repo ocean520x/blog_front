@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import myAuth from '@/composables/myAuth.js';
 import myComment from '@/composables/myComment';
-import dayjs from 'dayjs';
-import MarkdownPreview from '@/components/markdown/markdownPreview.vue';
 import { reactive } from 'vue';
 
 const { isLogin } = myAuth();
@@ -32,7 +30,22 @@ const onPublish = async () => {
       <el-card shadow="hover">
         <template #header> 评论列表</template>
         <div class="p-1" v-if="comments">
-          <comment-item v-for="(comment, index) in comments" :key="index" :comment="comment" />
+          <comment-item
+            v-for="(comment, index) in comments"
+            :key="index"
+            :comments="comments"
+            :comment="comment"
+            type="main"
+          >
+            <comment-item
+              v-for="reply in comment?.reply_comments"
+              :key="reply.id"
+              :comments="comments"
+              :comment="reply"
+              type="item"
+              class="ml-5 bg-green-100"
+            />
+          </comment-item>
         </div>
         <div v-else class=""><icon-info fill="#f5a623" size="16" />&nbsp;暂无评论</div>
       </el-card>
