@@ -11,5 +11,13 @@ export default () => {
     comments.value = res.data;
   }
 
-  return { comments, getComments };
+  async function addComment(data: any) {
+    const res = await myAxios.request<ApiData<MyComment>>({
+      url: `comment/${data.topic_id}`,
+      method: 'POST',
+      data,
+    });
+  }
+
+  return { comments, getComments, addComment };
 };

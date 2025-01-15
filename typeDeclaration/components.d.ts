@@ -25,6 +25,7 @@ declare module 'vue' {
     AuthRepassword: typeof import('./../src/views/auth/repassword.vue')['default']
     CaptchaCode: typeof import('./../src/components/captcha/code.vue')['default']
     CaptchaImg: typeof import('./../src/components/captcha/img.vue')['default']
+    CommentItem: typeof import('./../src/components/comment/item.vue')['default']
     CommentList: typeof import('./../src/components/comment/list.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
