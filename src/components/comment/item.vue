@@ -5,7 +5,7 @@ import { MyComment } from '@/interfaces/apiResponse';
 import { reactive } from 'vue';
 import myComment from '@/composables/myComment';
 
-const { addReply } = myComment();
+const { addReply, getComments } = myComment();
 const { comment, type, comments } = defineProps<{
   comment: MyComment;
   type: 'main' | 'item';
@@ -19,6 +19,7 @@ const form = reactive({
 });
 const onAddReply = async () => {
   const resComment = await addReply(form);
+  // await getComments(comment.topic_id);
   comments?.find((c) => c.id === resComment?.belong_to_comment?.id)?.reply_comments?.push(resComment);
   showReply.value = false;
   form.content = '';
