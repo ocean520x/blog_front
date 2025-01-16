@@ -7,7 +7,7 @@ const { isLogin } = myAuth();
 const { t_id } = defineProps<{
   t_id: string | number;
 }>();
-const { comments, getComments, addComment } = myComment();
+const { comments, getComments, addComment, addReply } = myComment();
 const form = reactive({
   content: '',
   topic_id: t_id,
@@ -31,10 +31,12 @@ const onPublish = async () => {
         <template #header> 评论列表</template>
         <div class="p-1" v-if="comments">
           <comment-item
-            v-for="(comment, index) in comments"
-            :key="index"
+            v-for="comment in comments"
+            :key="comment.id"
             :comments="comments"
             :comment="comment"
+            :add-reply="addReply"
+            @refresh="getComments(t_id)"
             type="main"
           >
             <comment-item
@@ -42,6 +44,8 @@ const onPublish = async () => {
               :key="reply.id"
               :comments="comments"
               :comment="reply"
+              :add-reply="addReply"
+              @refresh="getComments(t_id)"
               type="item"
               class="ml-5 bg-green-100"
             />

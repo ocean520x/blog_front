@@ -3,14 +3,13 @@ import dayjs from 'dayjs';
 import MarkdownPreview from '@/components/markdown/markdownPreview.vue';
 import { MyComment } from '@/interfaces/apiResponse';
 import { reactive } from 'vue';
-import myComment from '@/composables/myComment';
 
-const { addReply, getComments } = myComment();
-const { comment, type, comments } = defineProps<{
+const { comment, type, addReply } = defineProps<{
   comment: MyComment;
   type: 'main' | 'item';
-  comments: MyComment[];
+  addReply?: (data: any) => Promise<MyComment>;
 }>();
+const emit = defineEmits(['refresh']);
 const showReply = ref<boolean>(false);
 const form = reactive({
   content: '',
@@ -18,9 +17,8 @@ const form = reactive({
   comment_id: comment.id,
 });
 const onAddReply = async () => {
-  const resComment = await addReply(form);
-  // await getComments(comment.topic_id);
-  comments?.find((c) => c.id === resComment?.belong_to_comment?.id)?.reply_comments?.push(resComment);
+  await addReply(form);
+  emit('refresh');
   showReply.value = false;
   form.content = '';
 };
