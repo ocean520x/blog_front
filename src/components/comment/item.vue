@@ -3,13 +3,17 @@ import dayjs from 'dayjs';
 import MarkdownPreview from '@/components/markdown/markdownPreview.vue';
 import { MyComment } from '@/interfaces/apiResponse';
 import { reactive } from 'vue';
+import myAuth from '@/composables/myAuth';
+import myLocalStore from '@/composables/myLocalStore';
 
-const { comment, type, addReply } = defineProps<{
+const { comment, type, addReply, delComment } = defineProps<{
   comment: MyComment;
   type: 'main' | 'item';
   addReply?: (data: any) => Promise<MyComment>;
+  delComment: (c_id: string | number) => Promise<void>;
 }>();
 const emit = defineEmits(['refresh']);
+const user_id = myLocalStore().get('userInfo')?.id;
 const showReply = ref<boolean>(false);
 const form = reactive({
   content: '',
@@ -49,12 +53,19 @@ const onAddReply = async () => {
         </div>
         <div class="flex gap-2 items-center justify-center">
           <icon-comment
+            v-if="myAuth().isLogin()"
             @click="showReply = !showReply"
             theme="outline"
             size="16"
             class="hover:text-green-700 cursor-pointer"
           />
-          <icon-delete theme="outline" size="16" class="hover:text-amber-700 cursor-pointer" />
+          <icon-delete
+            v-if="myAuth().isSuperAdmin() || comment?.user_id === user_id"
+            @click="delComment(comment.id)"
+            theme="outline"
+            size="16"
+            class="hover:text-amber-700 cursor-pointer"
+          />
         </div>
       </div>
       <div class="p-3 text-slate-600">

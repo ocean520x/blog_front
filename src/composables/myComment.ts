@@ -35,5 +35,22 @@ export default () => {
     return res.data;
   }
 
-  return { comments, getComments, addComment, addReply };
+  async function delComment(c_id: any) {
+    try {
+      await ElMessageBox.confirm('您确认要删除该评论吗？', '删除提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      });
+      await myAxios.request<ApiData<null>>({
+        url: `comment/${c_id}`,
+        method: 'DELETE',
+      });
+      location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  return { comments, getComments, addComment, addReply, delComment };
 };

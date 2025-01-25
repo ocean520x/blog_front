@@ -7,7 +7,7 @@ const { isLogin } = myAuth();
 const { t_id } = defineProps<{
   t_id: string | number;
 }>();
-const { comments, getComments, addComment, addReply } = myComment();
+const { comments, getComments, addComment, addReply, delComment } = myComment();
 const form = reactive({
   content: '',
   topic_id: t_id,
@@ -36,6 +36,7 @@ const onPublish = async () => {
             :comments="comments"
             :comment="comment"
             :add-reply="addReply"
+            :del-comment="delComment"
             @refresh="getComments(t_id)"
             type="main"
           >
@@ -45,6 +46,7 @@ const onPublish = async () => {
               :comments="comments"
               :comment="reply"
               :add-reply="addReply"
+              :del-comment="delComment"
               @refresh="getComments(t_id)"
               type="item"
               class="ml-5 bg-green-100"
