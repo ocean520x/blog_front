@@ -29,8 +29,8 @@ if (info.is_super_admin == 'no' || !info.is_super_admin) router.push({ name: 'ho
         <layout-history />
       </div>
       <div class="relative overflow-y-auto mt-2">
-        <router-view #default="{ Component }">
-          <component class="absolute w-full" :is="Component"></component>
+        <router-view #default="{ Component, route }">
+          <component :is="Component" :key="route.fullPath" class="absolute w-full" />
         </router-view>
       </div>
     </div>
