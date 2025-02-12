@@ -24,7 +24,7 @@ const logout = async () => {
   info.value = null;
   emit('logout');
 };
-
+const u_id = info.value?.id;
 onMounted(() => {
   document.addEventListener('fullscreenchange', handleFullScreenChange);
 });
@@ -48,7 +48,7 @@ onUnmounted(() => {
       :style="{ backgroundColor: backgroundColor }"
       class="flex flex-col absolute top-[30px] left-6 px-1 py-2 z-50 border border-slate-400 shadow rounded"
     >
-      <span @click="$router.push({ name: 'person.me' })" class="span-item">个人中心</span>
+      <span @click="$router.push({ name: 'person.me', params: { u_id } })" class="span-item">个人中心</span>
       <span class="span-item">设置头像</span>
       <span class="span-item">重置密码</span>
       <router-link v-if="myAuth().isSuperAdmin() && type != 'admin'" :to="{ name: 'admin' }" class="span-item"

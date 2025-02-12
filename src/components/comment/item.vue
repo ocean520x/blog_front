@@ -35,15 +35,19 @@ const onAddReply = async () => {
         <div class="flex items-center justify-between gap-1">
           <div>
             <el-avatar
+              @click="$router.push({ name: 'person.me', params: { u_id: comment.user.id } })"
+              :src="comment.user.avatar"
               shape="square"
               :size="42"
-              :src="comment.user.avatar"
               class="hover:scale-105 duration-300 cursor-pointer"
             />
           </div>
           <div class="flex flex-col gap-1 justify-center">
             <span class="flex items-center justify-start text-xs text-slate-600 gap-1">
-              <icon-me fill="#9013fe" /> <router-link to="/">{{ comment.user.name }}</router-link></span
+              <icon-me fill="#9013fe" />
+              <router-link :to="{ name: 'person.me', params: { u_id: comment.user.id } }">{{
+                comment.user.name
+              }}</router-link></span
             >
             <span class="flex items-center justify-start text-xs text-slate-600 gap-1">
               <icon-stopwatch-start fill="#7ed321" />
@@ -74,18 +78,25 @@ const onAddReply = async () => {
         </template>
         <template v-else>
           <div class="flex justify-start items-center text-xs gap-1">
-            <icon-circle-double-right theme="outline" size="14" fill="#7ed321" />{{ comment.reply_user?.name }}:
+            <icon-circle-double-right theme="outline" size="14" fill="#7ed321" />
+            <span
+              @click="$router.push({ name: 'person.me', params: { u_id: comment.reply_user.id } })"
+              class="hover:underline cursor-pointer"
+              >{{ comment.reply_user?.name }}:</span
+            >
           </div>
           <div class="text-xs text-slate-600">{{ comment.content }}</div>
         </template>
         <div v-if="showReply" class="mt-2">
           <el-input
             v-model="form.content"
+            v-clearError="'content'"
             :rows="2"
             type="textarea"
             style="font-size: 12px"
             placeholder="请输入回复内容"
           />
+          <error-alert name="content" />
           <el-button @click="onAddReply" type="success" size="small" class="mt-2">
             <icon-comment />&nbsp;回复
           </el-button>

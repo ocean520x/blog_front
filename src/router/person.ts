@@ -5,7 +5,7 @@ export default {
   component: () => import('@/layout/person.vue'),
   children: [
     {
-      path: 'me',
+      path: 'me/:u_id',
       name: 'person.me',
       component: () => import('@/views/front/me.vue'),
     },

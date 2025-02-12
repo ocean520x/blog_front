@@ -12,12 +12,17 @@ const { item } = defineProps<{
   >
     <div class="col-span-10 flex items-center justify-start gap-2">
       <div class="min-w-32 flex flex-col gap-1 items-center justify-center">
-        <el-avatar shape="square" :size="50" :src="item.user.avatar" />
+        <el-avatar
+          @click="$router.push({ name: 'person.me', params: { u_id: item.user.id } })"
+          :src="item.user.avatar"
+          shape="square"
+          :size="50"
+        />
         <div
           class="flex items-center justify-center gap-1 text-xs text-orange-600 hover:text-orange-500 hover:underline duration-300"
         >
           <icon-me fill="#9013fe" />
-          <router-link to="/">{{ item.user.name }}</router-link>
+          <router-link :to="{ name: 'person.me', params: { u_id: item.user.id } }">{{ item.user.name }}</router-link>
         </div>
       </div>
       <router-link
