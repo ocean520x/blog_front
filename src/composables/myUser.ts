@@ -1,8 +1,10 @@
 import myAxios from '@/plugins/axios';
-import { ApiData, UserModel } from '@/interfaces/apiResponse';
+import { ApiData, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse';
 
 export default () => {
   const user = ref<UserModel>();
+  const topics = ref<PageData<MyTopic>>();
+
   async function getCurrentUser() {
     const res = await myAxios.request<ApiData<UserModel>>({
       url: 'get_current_user',
@@ -17,5 +19,12 @@ export default () => {
     user.value = res.data;
   }
 
-  return { getCurrentUser, user, getOneUser };
+  async function getOneUserTopics(arg: Record<string, any>) {
+    const paramsStr = Object.entries(arg).map(e => e.join('=')).join('&');
+    topics.value = await myAxios.request < PageData<MyTopic>({
+      url: `get_one_user_topics?${paramsStr}`
+    })
+  }
+
+  return { getCurrentUser, user, getOneUser, topics, getOneUserTopics };
 };

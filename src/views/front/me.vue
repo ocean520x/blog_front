@@ -24,6 +24,16 @@ await getOneUser(u_id);
           >TA的评论</router-link
         >
       </div>
+      <div class="">
+        <el-card shadow="never">
+          <section class="">
+            <div class="left">
+              <el-tag type="primary">Tag 1</el-tag>
+            </div>
+            <div class="right"></div>
+          </section>
+        </el-card>
+      </div>
     </div>
   </main>
 </template>
