@@ -20,10 +20,12 @@ export default () => {
   }
 
   async function getOneUserTopics(arg: Record<string, any>) {
-    const paramsStr = Object.entries(arg).map(e => e.join('=')).join('&');
-    topics.value = await myAxios.request < PageData<MyTopic>({
-      url: `get_one_user_topics?${paramsStr}`
-    })
+    const paramsStr = Object.entries(arg)
+      .map((e) => e.join('='))
+      .join('&');
+    topics.value = await myAxios.request<PageData<MyTopic>>({
+      url: `get_one_user_topics?${paramsStr}`,
+    });
   }
 
   return { getCurrentUser, user, getOneUser, topics, getOneUserTopics };
