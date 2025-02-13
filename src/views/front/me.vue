@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import myUser from '@/composables/myUser';
+import dayjs from 'dayjs';
 const route = useRoute();
 const u_id = route.params?.u_id;
 const { getOneUser, user, topics, getOneUserTopics } = myUser();
@@ -13,7 +14,7 @@ await getOneUserTopics({ page: route.query.page || 1, u_id: route.params.u_id })
     <div class="mt-2">
       <div class="flex justify-center items-center gap-2">
         <router-link
-          to="#"
+          :to="{ name: 'person.me' }"
           class="bg-slate-800 text-slate-100 px-2 py-1 text-xs rounded hover:bg-slate-600 duration-300"
           :class="{ active: $route.name === 'person.me' }"
           >TA的帖子</router-link
@@ -27,17 +28,22 @@ await getOneUserTopics({ page: route.query.page || 1, u_id: route.params.u_id })
       </div>
       <div v-if="topics" class="mt-3">
         <el-card shadow="never">
-          <section class="">
+          <section
+            v-for="(topic, index) in topics.data"
+            :key="index"
+            class="flex justify-between items-center border-b border-b-slate-300"
+          >
             <div
-              v-for="(topic, index) in topics.data"
-              :key="index"
               @click="$router.push({ name: 'front.topic.show', params: { t_id: topic.id } })"
-              class="flex justify-start items-center gap-2 text-slate-600 p-3 border-b border-b-slate-300 hover:text-green-600 cursor-pointer duration-300"
+              class="flex justify-start items-center gap-2 text-slate-600 p-3 hover:text-green-600 cursor-pointer duration-300"
             >
               <el-tag type="primary">帖子</el-tag>
               <span>{{ topic.title }}</span>
             </div>
-            <div class="right"></div>
+            <div class="flex justify-end items-center text-xs text-slate-500 gap-2">
+              <icon-timer size="14" fill="#50e3c2" />
+              {{ dayjs(topic.created_at).fromNow() }}
+            </div>
           </section>
         </el-card>
         <me-pagination

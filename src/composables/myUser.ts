@@ -1,9 +1,10 @@
 import myAxios from '@/plugins/axios';
-import { ApiData, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse';
+import { ApiData, MyComment, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse';
 
 export default () => {
   const user = ref<UserModel>();
   const topics = ref<PageData<MyTopic>>();
+  const comments = ref<PageData<MyComment>>();
 
   async function getCurrentUser() {
     const res = await myAxios.request<ApiData<UserModel>>({
@@ -28,5 +29,14 @@ export default () => {
     });
   }
 
-  return { getCurrentUser, user, getOneUser, topics, getOneUserTopics };
+  async function getOneUserComments(arg: Record<string, any>) {
+    const paramsStr = Object.entries(arg)
+      .map((e) => e.join('='))
+      .join('&');
+    comments.value = await myAxios.request<PageData<MyComment>>({
+      url: `get_one_user_comments?${paramsStr}`,
+    });
+  }
+
+  return { getCurrentUser, user, getOneUser, topics, getOneUserTopics, comments, getOneUserComments };
 };

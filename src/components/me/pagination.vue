@@ -8,7 +8,7 @@ defineEmits(['currentChange']);
 </script>
 
 <template>
-  <main class="bg-white border rounded-md mt-3 py-3 flex justify-end">
+  <main v-show="total / per_page > 1" class="bg-white border rounded-md mt-3 py-3 flex justify-end">
     <section class="md:hidden flex justify-center">
       <el-pagination
         @current-change="$emit('currentChange', $event)"

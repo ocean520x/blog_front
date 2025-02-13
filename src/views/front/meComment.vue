@@ -3,8 +3,9 @@ import myUser from '@/composables/myUser';
 import dayjs from 'dayjs';
 const route = useRoute();
 const u_id = route.params?.u_id;
-const { getOneUser, user } = myUser();
+const { getOneUser, user, comments, getOneUserComments } = myUser();
 await getOneUser(u_id);
+await getOneUserComments({ page: route.query.page || 1, u_id: route.params.u_id });
 </script>
 
 <template>
@@ -32,6 +33,37 @@ await getOneUser(u_id);
           :class="{ active: $route.name === 'person.me_comment' }"
           >TA的评论</router-link
         >
+      </div>
+      <div v-if="comments" class="mt-3">
+        <el-card shadow="never">
+          <section
+            v-for="(comment, index) in comments.data"
+            :key="index"
+            class="flex justify-between items-center border-b border-b-slate-300"
+          >
+            <div
+              @click="$router.push({ name: 'front.topic.show', params: { t_id: comment.topic_id } })"
+              class="flex justify-start items-center gap-2 text-slate-600 p-3 hover:text-green-600 cursor-pointer duration-300"
+            >
+              <el-tag type="primary">评论</el-tag>
+              <span>{{ comment.content }}</span>
+            </div>
+            <div class="flex justify-end items-center text-xs text-slate-500 gap-2 min-w-[100px]">
+              <icon-timer size="14" fill="#50e3c2" />
+              {{ dayjs(comment.created_at).fromNow() }}
+            </div>
+          </section>
+        </el-card>
+        <me-pagination
+          @currentChange="
+            $router.push({ name: 'person.me_comment', params: { u_id: $route.params.u_id }, query: { page: $event } })
+          "
+          :per_page="comments.meta.per_page"
+          :total="comments.meta.total"
+        />
+      </div>
+      <div v-else class="flex justify-center items-center p-3 text-slate-600 text-sm gap-2">
+        <icon-info size="16" fill="#f5a623" /> 他没有发表过评论
       </div>
     </div>
   </main>
