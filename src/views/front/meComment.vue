@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import myUser from '@/composables/myUser';
 import dayjs from 'dayjs';
+import MarkdownPreview from '@/components/markdown/markdownPreview.vue';
 const route = useRoute();
 const u_id = route.params?.u_id;
 const { getOneUser, user, comments, getOneUserComments } = myUser();
@@ -46,7 +47,7 @@ await getOneUserComments({ page: route.query.page || 1, u_id: route.params.u_id 
               class="flex justify-start items-center gap-2 text-slate-600 p-3 hover:text-green-600 cursor-pointer duration-300"
             >
               <el-tag type="primary">评论</el-tag>
-              <span>{{ comment.content }}</span>
+              <markdown-preview :text="comment.html" />
             </div>
             <div class="flex justify-end items-center text-xs text-slate-500 gap-2 min-w-[100px]">
               <icon-timer size="14" fill="#50e3c2" />
