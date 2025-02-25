@@ -11,5 +11,10 @@ export default {
       name: 'member.me',
       component: () => import('@/views/front/memberMe.vue'),
     },
+    {
+      path: 'avatar',
+      name: 'member.avatar',
+      component: () => import('@/views/front/memberAvatar.vue'),
+    },
   ],
 } as RouteRecordRaw;

@@ -25,8 +25,8 @@ const user = ref<UserModel>(userInfo);
     </div>
     <div class="col-span-10">
       <el-card>
-        <template #header> 修改昵称 </template>
-        1232312
+        <template #header> 修改头像 </template>
+        33333
       </el-card>
     </div>
   </main>
