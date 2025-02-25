@@ -99,3 +99,7 @@ export interface MyComment {
   reply_comments?: MyComment[];
   belong_to_comment?: MyComment;
 }
+
+export interface MyFavorite {
+  is_favorite: boolean;
+}

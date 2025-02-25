@@ -1,11 +1,11 @@
 import myAxios from '@/plugins/axios';
-import { ApiData, MyComment, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse';
+import { ApiData, MyComment, MyFavorite, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse';
 
 export default () => {
   const user = ref<UserModel>();
   const topics = ref<PageData<MyTopic>>();
   const comments = ref<PageData<MyComment>>();
-
+  const isFavorite = ref<boolean>(false);
   async function getCurrentUser() {
     const res = await myAxios.request<ApiData<UserModel>>({
       url: 'get_current_user',
@@ -38,5 +38,19 @@ export default () => {
     });
   }
 
-  return { getCurrentUser, user, getOneUser, topics, getOneUserTopics, comments, getOneUserComments };
+  async function getIsFavorite(u_id: any, t_id: any) {
+    const res = await myAxios.request<ApiData<MyFavorite>>({
+      url: `is_favorite/${u_id}/${t_id}`,
+    });
+    isFavorite.value = res.data.is_favorite;
+  }
+
+  async function toggleFavorite(t_id: any) {
+    await myAxios.request<ApiData<any>>({
+      url: `favorite/toggle/${t_id}`,
+    });
+  }
+
+
+  return { getCurrentUser, user, getOneUser, topics, getOneUserTopics, comments, getOneUserComments, isFavorite, getIsFavorite, toggleFavorite };
 };
