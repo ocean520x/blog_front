@@ -3,6 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 export default {
   path: '/person',
   component: () => import('@/layout/person.vue'),
+  meta: { auth: true },
   children: [
     {
       path: 'me/:u_id',
