@@ -4,6 +4,7 @@ import myLocalStore from '@/composables/myLocalStore';
 import router from '@/router';
 import myCaptcha from '@/composables/myCaptcha';
 import dayjs from 'dayjs';
+import MyLocalStore from '@/composables/myLocalStore';
 export default () => {
   const { showCaptcha } = myCaptcha();
   const form = reactive({
@@ -18,6 +19,12 @@ export default () => {
   const isSuperAdmin = () => {
     const info: UserModel = myLocalStore().get('userInfo');
     if (info) return info.id == 1;
+    return false;
+  };
+
+  const isMine = (u_id: any) => {
+    const info: UserModel = MyLocalStore().get('userInfo');
+    if (info) return info.id == u_id;
     return false;
   };
 
@@ -107,5 +114,6 @@ export default () => {
     diffSendTime,
     getRePasswordCode,
     rePassword,
+    isMine,
   };
 };

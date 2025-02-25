@@ -14,5 +14,10 @@ export default {
       name: 'person.me_comment',
       component: () => import('@/views/front/meComment.vue'),
     },
+    {
+      path: 'me_favorite/:u_id',
+      name: 'person.me_favorite',
+      component: () => import('@/views/front/meFavorite.vue'),
+    },
   ],
 } as RouteRecordRaw;

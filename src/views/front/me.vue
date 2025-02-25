@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import myUser from '@/composables/myUser';
 import dayjs from 'dayjs';
+import myAuth from '@/composables/myAuth';
 const route = useRoute();
 const u_id = route.params?.u_id;
 const { getOneUser, user, topics, getOneUserTopics } = myUser();
@@ -25,8 +26,15 @@ await getOneUserTopics({ page: route.query.page || 1, u_id: route.params.u_id })
           :class="{ active: $route.name === 'person.me_comment' }"
           >TA的评论</router-link
         >
+        <router-link
+          v-if="myAuth().isMine(u_id)"
+          :to="{ name: 'person.me_favorite' }"
+          class="bg-slate-800 text-slate-100 px-2 py-1 text-xs rounded hover:bg-slate-600 duration-300"
+          :class="{ active: $route.name === 'person.me_favorite' }"
+          >我的收藏</router-link
+        >
       </div>
-      <div v-if="topics" class="mt-3">
+      <div v-if="topics && topics.data?.length > 0" class="mt-3">
         <el-card shadow="never">
           <section
             v-for="(topic, index) in topics.data"

@@ -51,6 +51,26 @@ export default () => {
     });
   }
 
+  async function getOneUserFavoriteTopics(arg: Record<string, any>) {
+    const paramsStr = Object.entries(arg)
+      .map((e) => e.join('='))
+      .join('&');
+    topics.value = await myAxios.request<PageData<MyTopic>>({
+      url: `get_one_user_favorite_topics?${paramsStr}`,
+    });
+  }
 
-  return { getCurrentUser, user, getOneUser, topics, getOneUserTopics, comments, getOneUserComments, isFavorite, getIsFavorite, toggleFavorite };
+  return {
+    getCurrentUser,
+    user,
+    getOneUser,
+    topics,
+    getOneUserTopics,
+    comments,
+    getOneUserComments,
+    isFavorite,
+    getIsFavorite,
+    toggleFavorite,
+    getOneUserFavoriteTopics,
+  };
 };
