@@ -49,7 +49,7 @@ onUnmounted(() => {
       class="flex flex-col absolute top-[30px] left-6 px-1 py-2 z-50 border border-slate-400 shadow rounded"
     >
       <span @click="$router.push({ name: 'person.me', params: { u_id } })" class="span-item">个人中心</span>
-      <span @click="$router.push({ name: 'member.me', params: { u_id } })" class="span-item">编辑个资</span>
+      <span @click="$router.push({ name: 'member.me' })" class="span-item">编辑个资</span>
       <router-link v-if="myAuth().isSuperAdmin() && type != 'admin'" :to="{ name: 'admin' }" class="span-item"
         >进入后台</router-link
       >

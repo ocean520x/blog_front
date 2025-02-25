@@ -7,7 +7,7 @@ export default {
   meta: { auth: true },
   children: [
     {
-      path: 'me/:u_id',
+      path: 'me',
       name: 'member.me',
       component: () => import('@/views/front/memberMe.vue'),
     },

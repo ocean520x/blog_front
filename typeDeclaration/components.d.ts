@@ -63,6 +63,7 @@ declare module 'vue' {
     FrontMe_comment: typeof import('./../src/views/front/me_comment.vue')['default']
     FrontMeComment: typeof import('./../src/views/front/meComment.vue')['default']
     FrontMeFavorite: typeof import('./../src/views/front/meFavorite.vue')['default']
+    FrontMemberMain: typeof import('./../src/views/front/member/main.vue')['default']
     FrontMemberMe: typeof import('./../src/views/front/memberMe.vue')['default']
     FrontPerson: typeof import('./../src/views/front/person.vue')['default']
     FrontTopicAdd: typeof import('./../src/views/front/topicAdd.vue')['default']
