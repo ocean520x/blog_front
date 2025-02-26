@@ -28,8 +28,9 @@ export default () => {
 
   const isMine = (u_id: any) => {
     const info: UserModel = myLocalStore().get('userInfo')
-    if (info)
+    if (info) {
       return info.id === u_id
+    }
     return false
   }
 

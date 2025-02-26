@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import LayoutAvatar from '@/components/layout/avatar.vue'
 import myAuth from '@/composables/myAuth.js'
 import { ref } from 'vue'
 
@@ -26,7 +27,7 @@ getLoginState()
           <icon-home theme="outline" size="22" fill="#7ed321" />
         </router-link>
         <template v-if="isLogin">
-          <layout-avatar background-color="#726e6e" type="front" @logout="getLoginState" />
+          <LayoutAvatar background-color="#726e6e" type="front" @logout="getLoginState" />
         </template>
         <template v-else>
           <el-button type="success" size="small" @click="$router.push({ name: 'login' })">
