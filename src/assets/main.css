@@ -1,0 +1,9 @@
+@import "tailwindcss";
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+@theme {
+  --background-image-login: url('/images/login.jpg');
+  --width-web: 1250px;
+}
+
