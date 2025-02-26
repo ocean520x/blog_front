@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MarkdownEditor from '@/components/markdown/editor.vue'
 import myTopic from '@/composables/myTopic'
 import errorsStore from '@/store/errorsStore'
 import { useRouter } from 'vue-router'
@@ -46,7 +47,7 @@ function clearError(name: string) {
           <error-alert name="title" />
         </el-form-item>
         <el-form-item label="帖子内容">
-          <markdown-editor v-model="form.content" />
+          <MarkdownEditor v-model="form.content" />
           <error-alert name="content" />
         </el-form-item>
         <el-form-item>
