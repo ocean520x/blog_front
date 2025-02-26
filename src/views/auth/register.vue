@@ -60,7 +60,8 @@ async function onSubmit() {
           />
         </div>
         <ErrorAlert name="password_confirmation" />
-        <CaptchaCode v-model="form.code" :phone="form.phone" type="register" />
+        <CaptchaCode v-model="form.code" v-clearError="'code'" :phone="form.phone" type="register" />
+        <ErrorAlert name="code" />
         <div class="mt-8 flex justify-center text-lg text-black">
           <el-button round type="success" size="large" @click="onSubmit">
             <icon-user class="mr-2" />
