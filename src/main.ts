@@ -4,6 +4,7 @@ import App from './App.vue'
 import runAllPlugins from './plugins'
 import router, { runRouter } from './router'
 import './assets/main.css'
+import 'element-plus/dist/index.css'
 
 async function boot() {
   const app = createApp(App)
