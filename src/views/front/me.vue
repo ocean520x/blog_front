@@ -8,7 +8,7 @@
   </main>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 @reference "tailwindcss";
 a.active {
   --tw-bg-opacity: 1;
