@@ -11,6 +11,8 @@ const { topicDetail, editTopic, getTopicDetail, getCategories, categories } = my
 await getTopicDetail(t_id)
 await getCategories()
 async function edit() {
+  if (!topicDetail.value)
+    return
   const res = await editTopic(topicDetail.value)
   router.push({ name: 'front.topic.show', params: { t_id: res.data.id } })
 }
@@ -28,7 +30,7 @@ function clearError(name: string) {
           <span>编辑帖子</span>
         </div>
       </template>
-      <el-form label-width="120px">
+      <el-form v-if="topicDetail" label-width="120px">
         <el-form-item v-if="categories" label="帖子大类">
           <el-select
             v-model="topicDetail.category_id"
@@ -39,7 +41,7 @@ function clearError(name: string) {
             <el-option
               v-for="(category, index) in categories"
               :key="index"
-              :selected="category.id === topicDetail.category.id"
+              :selected="category.id === topicDetail.category?.id"
               :label="category.title"
               :value="category.id"
             />

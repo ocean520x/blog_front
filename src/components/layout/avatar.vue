@@ -4,7 +4,7 @@ import myAuth from '@/composables/myAuth'
 import myLocalStore from '@/composables/myLocalStore'
 import { onMounted, onUnmounted, ref } from 'vue'
 
-const { backgroundColor, type } = withDefaults(defineProps<{ backgroundColor?: string, type: 'front' | 'admin' }>(), {
+withDefaults(defineProps<{ backgroundColor?: string, type: 'front' | 'admin' }>(), {
   backgroundColor: 'white',
 })
 const emit = defineEmits(['logout'])
