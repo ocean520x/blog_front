@@ -22,7 +22,7 @@ export interface MyLocalData {
 export interface MenuStore {
   menus: Ref<MyMenu[]>
   historyMenus: Ref<MyMenu[]>
-  breadcrumbRoute: null | RouteLocationNormalizedLoadedGeneric
+  breadcrumbRoute?: null | RouteLocationNormalizedLoadedGeneric
   init: () => void
   getMenuByRoutes: () => void
   addHistoryMenus: (route: RouteLocationNormalizedLoadedGeneric) => void

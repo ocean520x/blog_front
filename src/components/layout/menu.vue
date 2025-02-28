@@ -1,0 +1,69 @@
+<script setup lang="ts">
+import type { MyMenu } from '@/interfaces/interface'
+import menuStore from '@/store/menuStore'
+import showHideMenu from '@/store/showHideMenu'
+import * as Icon from '@icon-park/vue-next'
+import { useRouter } from 'vue-router'
+
+const menus = menuStore().menus
+const router = useRouter()
+function resetMenus() {
+  menus.forEach((menu) => {
+    menu.isChoose = false
+    if (menu?.children) {
+      menu.children.forEach((childMenu) => {
+        childMenu.isChoose = false
+      })
+    }
+  })
+}
+function clickMenu(menu: MyMenu, childMenu?: MyMenu) {
+  resetMenus()
+  menu.isChoose = true
+  if (childMenu) {
+    childMenu.isChoose = true
+    router.push({ name: childMenu.routeName })
+  }
+}
+</script>
+
+<template>
+  <div v-show="showHideMenu().show" class="bg-slate-800 w-[220px]">
+    <h2 class="flex items-center justify-center mt-4 text-slate-100 gap-2">
+      <icon-circle-four size="22" fill="#7ed321" />
+      <span>欧顺论坛后台管理</span>
+    </h2>
+    <div v-for="(menu, index) in menus" :key="index" class="flex flex-col text-slate-100">
+      <section class="mt-2">
+        <div class="flex justify-between items-center px-4 py-2" @click="clickMenu(menu)">
+          <div class="flex items-center gap-1 cursor-pointer">
+            <component :is="Icon[menu.icon as keyof typeof Icon]" />
+            <span>{{ menu.title }}</span>
+          </div>
+          <div class="cursor-pointer hover:text-green-600 duration-300">
+            <icon-minus v-if="menu.isChoose" />
+            <icon-plus v-else />
+          </div>
+        </div>
+        <div v-show="menu.isChoose">
+          <div
+            v-for="(child, i) in menu.children"
+            :key="i"
+            class="text-xs hover:bg-slate-700 duration-300 cursor-pointer p-4 indent-5"
+            :class="{ active: child.isChoose }"
+            @click="clickMenu(menu, child)"
+          >
+            {{ child.title }}
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+@reference "tailwindcss";
+.active {
+  @apply bg-slate-700;
+}
+</style>
