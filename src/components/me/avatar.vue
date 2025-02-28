@@ -2,7 +2,7 @@
 import type { UserModel } from '@/interfaces/apiResponse'
 import dayjs from 'dayjs'
 
-const props = defineProps<{ user: UserModel }>()
+defineProps<{ user: UserModel }>()
 </script>
 
 <template>

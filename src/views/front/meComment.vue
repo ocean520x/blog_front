@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import MarkdownPreview from '@/components/markdown/markdownPreview.vue'
 import MeAvatar from '@/components/me/avatar.vue'
 import MePagination from '@/components/me/pagination.vue'
 import myAuth from '@/composables/myAuth'
@@ -8,9 +9,9 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const u_id = route.params?.u_id
-const { getOneUser, user, topics, getOneUserTopics } = myUser()
+const { getOneUser, user, comments, getOneUserComments } = myUser()
 await getOneUser(u_id)
-await getOneUserTopics({ page: route.query.page || 1, u_id: route.params.u_id })
+await getOneUserComments({ page: route.query.page || 1, u_id: route.params.u_id })
 </script>
 
 <template>
@@ -41,38 +42,38 @@ await getOneUserTopics({ page: route.query.page || 1, u_id: route.params.u_id })
           我的收藏
         </router-link>
       </div>
-      <div v-if="topics && topics.data?.length > 0" class="mt-3">
+      <div v-if="comments" class="mt-3">
         <el-card shadow="never">
           <section
-            v-for="(topic, index) in topics.data"
+            v-for="(comment, index) in comments.data"
             :key="index"
             class="flex justify-between items-center border-b border-b-slate-300"
           >
             <div
               class="flex justify-start items-center gap-2 text-slate-600 p-3 hover:text-green-600 cursor-pointer duration-300"
-              @click="$router.push({ name: 'front.topic.show', params: { t_id: topic.id } })"
+              @click="$router.push({ name: 'front.topic.show', params: { t_id: comment.topic_id } })"
             >
               <el-tag type="primary">
-                帖子
+                评论
               </el-tag>
-              <span>{{ topic.title }}</span>
+              <MarkdownPreview :text="comment.html" />
             </div>
-            <div class="flex justify-end items-center text-xs text-slate-500 gap-2">
+            <div class="flex justify-end items-center text-xs text-slate-500 gap-2 min-w-[100px]">
               <icon-timer size="14" fill="#50e3c2" />
-              {{ dayjs(topic.created_at).fromNow() }}
+              {{ dayjs(comment.created_at).fromNow() }}
             </div>
           </section>
         </el-card>
         <MePagination
-          :per-page="topics.meta.per_page"
-          :total="topics.meta.total"
+          :per-page="comments.meta.per_page"
+          :total="comments.meta.total"
           @current-change="
-            $router.push({ name: 'person.me', params: { u_id: $route.params.u_id }, query: { page: $event } })
+            $router.push({ name: 'person.me_comment', params: { u_id: $route.params.u_id }, query: { page: $event } })
           "
         />
       </div>
       <div v-else class="flex justify-center items-center p-3 text-slate-600 text-sm gap-2">
-        <icon-info size="16" fill="#f5a623" /> 他没有发表过帖子
+        <icon-info size="16" fill="#f5a623" /> 他没有发表过评论
       </div>
     </div>
   </main>
