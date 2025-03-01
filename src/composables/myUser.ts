@@ -1,6 +1,7 @@
 import type { ApiData, MyComment, MyFavorite, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse'
 import myAxios from '@/plugins/axios'
 import { ref } from 'vue'
+import myAuth from './myAuth'
 
 export default () => {
   const user = ref<UserModel>()
@@ -61,6 +62,15 @@ export default () => {
     })
   }
 
+  async function updateCurrentUser(data: any) {
+    await myAxios.request<ApiData<UserModel>>({
+      url: `update_current_user`,
+      method: 'PUT',
+      data,
+    })
+    await myAuth().logout()
+  }
+
   return {
     getCurrentUser,
     user,
@@ -73,5 +83,6 @@ export default () => {
     getIsFavorite,
     toggleFavorite,
     getOneUserFavoriteTopics,
+    updateCurrentUser,
   }
 }

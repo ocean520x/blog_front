@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { UserModel } from '@/interfaces/apiResponse'
 import myLocalStore from '@/composables/myLocalStore'
+import myUser from '@/composables/myUser'
 import { ref } from 'vue'
 
+const { updateCurrentUser } = myUser()
 const userInfo: UserModel = myLocalStore().get('userInfo')
 const user = ref<UserModel>(userInfo)
 </script>
@@ -31,7 +33,16 @@ const user = ref<UserModel>(userInfo)
         <template #header>
           修改昵称
         </template>
-        1232312
+        <el-form label-width="120px">
+          <el-form-item label="昵称">
+            <el-input v-model="user.name" />
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="updateCurrentUser(user)">
+              确认
+            </el-button>
+          </el-form-item>
+        </el-form>
       </el-card>
     </div>
   </main>
