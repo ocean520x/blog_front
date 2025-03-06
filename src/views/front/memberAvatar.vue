@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { UserModel } from '@/interfaces/apiResponse'
+import UploadFile from '@/components/upload/file.vue'
 import myLocalStore from '@/composables/myLocalStore'
 import { ref } from 'vue'
 
@@ -31,7 +32,7 @@ const user = ref<UserModel>(userInfo)
         <template #header>
           修改头像
         </template>
-        33333
+        <UploadFile v-model="user.avatar" />
       </el-card>
     </div>
   </main>

@@ -15,8 +15,7 @@ const user = ref<UserModel>(userInfo)
       <el-avatar shape="square" :size="180" :src="user?.avatar" />
       <router-link
         :to="{ name: 'member.me' }"
-        class="bg-slate-100 w-full mt-2 rounded p-2 text-sm text-center hover:bg-slate-300 duration-300 text-slate-800"
-        :class="{ active: $route.name === 'member.me' }"
+        class="bg-slate-100 w-full mt-2 rounded p-2 text-sm text-center hover:bg-slate-300 duration-300 text-slate-800" :class="{ active: $route.name === 'member.me' }"
       >
         修改昵称
       </router-link>
