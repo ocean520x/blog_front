@@ -103,3 +103,9 @@ export interface MyComment {
 export interface MyFavorite {
   is_favorite: boolean
 }
+
+export interface MyTab {
+  label: string
+  routeName?: string
+  event?: () => void
+}

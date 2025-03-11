@@ -33,8 +33,10 @@ export default defineStore('menu', (): MenuStore => {
   }
 
   function addHistoryMenus(route: RouteLocationNormalizedLoadedGeneric) {
-    if (!route.meta?.menu)
+    if (!route.meta?.menu || route.meta?.notHistory) {
       return
+    }
+
     const historyMenu = { ...route.meta?.menu, routeName: route.name } as MyMenu
     const hasSame = historyMenus.value.some(menu => menu.routeName === route.name)
     if (!hasSame)

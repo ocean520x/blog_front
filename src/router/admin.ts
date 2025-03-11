@@ -34,7 +34,7 @@ export default [
         meta: { menu: { title: '添加帖子大类', routeName: 'category.add' } },
         component: () => import('@/views/admin/category/add.vue'),
       },
-      { path: 'category/edit', name: 'category.edit', component: () => import('@/views/admin/category/edit.vue') },
+      { path: 'category/edit', name: 'category.edit', meta: { notHistory: true }, component: () => import('@/views/admin/category/edit.vue') },
     ],
   },
   {
@@ -55,7 +55,7 @@ export default [
         meta: { menu: { title: '添加帖子', routeName: 'topic.add' } },
         component: () => import('@/views/admin/topic/add.vue'),
       },
-      { path: 'topic/edit', name: 'topic.edit', component: () => import('@/views/admin/topic/edit.vue') },
+      { path: 'topic/edit', name: 'topic.edit', meta: { notHistory: true }, component: () => import('@/views/admin/topic/edit.vue') },
     ],
   },
 ] as RouteRecordRaw[]
