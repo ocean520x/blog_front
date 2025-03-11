@@ -23,18 +23,18 @@ export default [
     meta: { auth: true, menu: { title: '帖子大类管理', sort: 2, icon: 'AllApplication' } },
     children: [
       {
-        path: 'category/index',
+        path: 'index',
         name: 'category.index',
         meta: { menu: { title: '帖子大类列表', routeName: 'category.index' } },
         component: () => import('@/views/admin/category/index.vue'),
       },
       {
-        path: 'category/add',
+        path: 'add',
         name: 'category.add',
         meta: { menu: { title: '添加帖子大类', routeName: 'category.add' } },
         component: () => import('@/views/admin/category/add.vue'),
       },
-      { path: 'category/edit', name: 'category.edit', meta: { notHistory: true }, component: () => import('@/views/admin/category/edit.vue') },
+      { path: 'edit/:c_id', name: 'category.edit', meta: { notHistory: true }, component: () => import('@/views/admin/category/edit.vue') },
     ],
   },
   {
@@ -44,18 +44,18 @@ export default [
     meta: { auth: true, menu: { title: '帖子管理', sort: 3, icon: 'FourRoundPointConnection' } },
     children: [
       {
-        path: 'topic/index',
+        path: 'index',
         name: 'topic.index',
         meta: { menu: { title: '帖子列表', routeName: 'topic.index' } },
         component: () => import('@/views/admin/topic/index.vue'),
       },
       {
-        path: 'topic/add',
+        path: 'add',
         name: 'topic.add',
         meta: { menu: { title: '添加帖子', routeName: 'topic.add' } },
         component: () => import('@/views/admin/topic/add.vue'),
       },
-      { path: 'topic/edit', name: 'topic.edit', meta: { notHistory: true }, component: () => import('@/views/admin/topic/edit.vue') },
+      { path: 'edit/:t_id', name: 'topic.edit', meta: { notHistory: true }, component: () => import('@/views/admin/topic/edit.vue') },
     ],
   },
 ] as RouteRecordRaw[]

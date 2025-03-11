@@ -108,4 +108,5 @@ export interface MyTab {
   label: string
   routeName?: string
   event?: () => void
+  switchShow?:boolean
 }

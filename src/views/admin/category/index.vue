@@ -13,7 +13,7 @@ await getCategories()
         <component :is="Icon[category.icon]" />&nbsp;{{ category.title }}
       </h4>
       <div>
-        <el-button type="primary" size="small">
+        <el-button type="primary" size="small" @click="$router.push({ name: 'category.edit', params: { c_id: category.id } })">
           <icon-editor />&nbsp;编辑
         </el-button>
         <el-button type="danger" size="small">

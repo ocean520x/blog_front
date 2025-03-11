@@ -1,16 +1,19 @@
 <script setup lang="ts">
 import type { MyTab } from '@/interfaces/apiResponse'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-const { tabs } = defineProps<{
+const props = defineProps<{
   tabs: MyTab[]
 }>()
 const route = useRoute()
 const router = useRouter()
-const active = ref(`name${tabs?.findIndex(tab => tab.routeName === route.name)}`)
+const active = ref(`name${props.tabs?.findIndex(tab => tab.routeName === route.name)}`)
+const tabs = computed(()=>{
+  return props.tabs.filter(tab=> tab?.switchShow ? tab?.routeName === route.name : true)
+})
 function change(pane: any) {
-  const tab = tabs[pane.index]
+  const tab = props.tabs[pane.index]
   if (tab?.event) {
     tab.event()
   }

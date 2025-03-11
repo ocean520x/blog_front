@@ -93,6 +93,21 @@ export default () => {
     })
   }
 
+  async function getCategory(c_id: any) {
+    const res = await myAxios.request<ApiData<MyCategory>>({
+      url: `category/${c_id}`,
+    })
+    category.value = res.data
+  }
+
+  async function editCategory(data: any) {
+    return await myAxios.request<ApiData<MyCategory>>({
+      url: `category/${data.value.id}`,
+      method: 'PUT',
+      data:data.value,
+    })
+  }
+
   return {
     categories,
     getCategories,
@@ -107,5 +122,7 @@ export default () => {
     delTopic,
     category,
     addCategory,
+    getCategory,
+    editCategory,
   }
 }

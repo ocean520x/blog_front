@@ -12,8 +12,8 @@ const form = reactive({
   icon: 'WaterfallsH',
 })
 const tabs = ref([
-  { label: '帖子大类添加', routeName: 'category.add' },
-  { label: '帖子大类编辑', routeName: 'category.edit' },
+  { label: '帖子大类添加', routeName: 'category.add'},
+  { label: '帖子大类编辑', routeName: 'category.edit', switchShow: true },
 ])
 async function onSubmit() {
   try {
