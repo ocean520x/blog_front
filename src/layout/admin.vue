@@ -34,7 +34,7 @@ if (info.is_super_admin === 'no' || !info.is_super_admin)
         <LayoutBreadcrumb />
         <LayoutHistory />
       </div>
-      <div class="relative overflow-y-auto mt-2">
+      <div class="relative overflow-y-auto mt-2 bg-white ">
         <router-view v-slot="{ Component, route: routePath }">
           <component :is="Component" :key="routePath.fullPath" class="absolute w-full" />
         </router-view>

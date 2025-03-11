@@ -7,6 +7,7 @@ import { reactive, ref } from 'vue'
 
 export default () => {
   const categories = ref<MyCategory[]>()
+  const category = ref<MyCategory>()
   const topics = ref<PageData<MyTopic>>()
   const topicDetail = ref<MyTopic>()
   const form = reactive({
@@ -84,6 +85,14 @@ export default () => {
     }
   }
 
+  async function addCategory(data: any) {
+    return await myAxios.request<ApiData<MyCategory>>({
+      url: 'category',
+      method: 'POST',
+      data,
+    })
+  }
+
   return {
     categories,
     getCategories,
@@ -96,5 +105,7 @@ export default () => {
     addTopic,
     editTopic,
     delTopic,
+    category,
+    addCategory,
   }
 }
