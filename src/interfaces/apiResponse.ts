@@ -10,6 +10,7 @@ export interface UserModel {
   email: string
   is_super_admin: string
   phone?: string | number
+  is_freeze:'yes' | 'no'
 }
 
 export interface LoginData {

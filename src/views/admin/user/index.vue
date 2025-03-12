@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
-const { users, getUsers } = myUser()
+const { users, getUsers,switchFreeze } = myUser()
 await getUsers({ page: route.query.page || 1 })
 const columns = [
   { id: 'id', label: 'ID', width: 50 },
@@ -33,8 +33,10 @@ const columns = [
             <span>{{  dayjs(row[col.id]).format('YYYY-MM-DD')}}</span>
           </template>
           <template v-if="col.type==='buttons'">
-           <el-button-group size="small">
-            <el-button type="primary"><icon-editor /></el-button>
+           <el-button-group v-if="row['id'] != 1" size="small">
+            <el-button type="primary"><icon-doc-detail /></el-button>
+            <el-button v-if="row['is_freeze'] === 'no'" @click="switchFreeze(row['id'], 'no')" type="warning"><icon-lock /></el-button>
+            <el-button v-else @click="switchFreeze(row['id'], 'yes')" type="success"><icon-unlock /></el-button>
             <el-button type="danger"><icon-delete /></el-button>
            </el-button-group>
           </template>

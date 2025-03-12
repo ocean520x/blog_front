@@ -2,6 +2,7 @@ import type { ApiData, MyComment, MyFavorite, MyTopic, PageData, UserModel } fro
 import myAxios from '@/plugins/axios'
 import { ref } from 'vue'
 import myAuth from './myAuth'
+import { ElMessageBox } from 'element-plus'
 
 export default () => {
   const user = ref<UserModel>()
@@ -79,6 +80,24 @@ export default () => {
     })
   }
 
+  async function switchFreeze(u_id: any,type: any) {
+    const str = type == 'yes' ? '解冻' : '冻结'
+    await ElMessageBox.confirm(
+      `您确定要${str}该用户吗？`,
+      '提示',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+    )
+      await myAxios.request<ApiData<null>>({
+        url:`user_freeze/${u_id}`,
+        method:'PUT'
+      })
+      location.reload();
+  }
+
   return {
     getCurrentUser,
     user,
@@ -94,5 +113,6 @@ export default () => {
     updateCurrentUser,
     users,
     getUsers,
+    switchFreeze
   }
 }
