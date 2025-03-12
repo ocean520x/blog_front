@@ -73,6 +73,15 @@ export default () => {
     await myAuth().logout()
   }
 
+  async function updateCurrentUserNick(data: any) {
+    await myAxios.request<ApiData<UserModel>>({
+      url: `update_current_user_nick`,
+      method: 'PUT',
+      data,
+    })
+    await myAuth().logout()
+  }
+
   async function getUsers(arg: Record<string, any>) {
     const paramsStr = Object.entries(arg).map(e => e.join('=')).join('&')
     users.value = await myAxios.request<PageData<UserModel>>({
@@ -134,5 +143,6 @@ export default () => {
     getUsers,
     switchFreeze,
     delUser,
+    updateCurrentUserNick,
   }
 }

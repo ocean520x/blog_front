@@ -4,7 +4,7 @@ import myLocalStore from '@/composables/myLocalStore'
 import myUser from '@/composables/myUser'
 import { ref } from 'vue'
 
-const { updateCurrentUser } = myUser()
+const { updateCurrentUserNick } = myUser()
 const userInfo: UserModel = myLocalStore().get('userInfo')
 const user = ref<UserModel>(userInfo)
 </script>
@@ -37,7 +37,7 @@ const user = ref<UserModel>(userInfo)
             <el-input v-model="user.name" />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="updateCurrentUser(user)">
+            <el-button type="primary" @click="updateCurrentUserNick(user)">
               确认
             </el-button>
           </el-form-item>
