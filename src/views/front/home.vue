@@ -4,7 +4,7 @@ import TopicItem from '@/components/topic/item.vue'
 import myLocalStore from '@/composables/myLocalStore'
 import myTopic from '@/composables/myTopic'
 import * as Icon from '@icon-park/vue-next'
-import { watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const { categories, getCategories, topics, getTopics, getTopicsByCategory } = myTopic()
@@ -26,6 +26,14 @@ watch(
     immediate: true,
   },
 )
+const searchWords = ref('')
+function search() {
+  getTopics(1, { key: 'title', keywords: searchWords.value })
+}
+function refresh() {
+  searchWords.value = ''
+  getTopics(1, { key: 'title', keywords: searchWords.value })
+}
 </script>
 
 <template>
@@ -49,7 +57,18 @@ watch(
         </router-link>
       </div>
     </section>
-    <section class="flex items-center justify-end pt-2">
+    <section class="flex items-center justify-between pt-4 pb-2">
+      <div class="flex justify-start items-center gap-2 w-1/3  ">
+        <el-input v-model="searchWords" placeholder="请输入搜索内容" @keyup.enter="search" />
+        <el-button-group class="w-[200px]">
+          <el-button type="primary" @click="search">
+            <icon-search />
+          </el-button>
+          <el-button type="success" @click="refresh">
+            <icon-refresh />
+          </el-button>
+        </el-button-group>
+      </div>
       <el-button type="primary" @click="$router.push({ name: 'front.topic.add' })">
         <icon-add-picture theme="outline" size="20" />&nbsp;
         <span>发布帖子</span>
