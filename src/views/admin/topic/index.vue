@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import myTopic from '@/composables/myTopic'
 import dayjs from 'dayjs'
+import { ref } from 'vue'
 
 const { topics, getTopics, adminDelTopic } = myTopic()
 await getTopics()
@@ -12,10 +13,20 @@ const columns = [
   { id: 'created_at', label: '创建时间', width: 120, type: 'date' },
   { id: '', label: '操作', type: 'buttons', width: 160 },
 ]
+const searchWords = ref('')
+function search() {
+  getTopics(1, { key: 'title', keywords: searchWords.value })
+}
 </script>
 
 <template>
-  <main v-if="topics" class="">
+  <main v-if="topics">
+    <div class="flex justify-start items-center gap-2 w-1/3 px-5 py-3">
+      <el-input v-model="searchWords" placeholder="请输入搜索内容" @keyup.enter="search" />
+      <el-button type="primary" @click="search">
+        <icon-search />
+      </el-button>
+    </div>
     <el-card shadow="never">
       <el-table :data="topics?.data" border stripe style="width: 100%" table-layout="fixed">
         <el-table-column v-for="col in columns" :key="col.id" v-slot="{ row }" :prop="col.id" :label="col.label" :width="col.width" align="center">
