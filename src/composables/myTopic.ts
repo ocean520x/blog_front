@@ -104,8 +104,26 @@ export default () => {
     return await myAxios.request<ApiData<MyCategory>>({
       url: `category/${data.value.id}`,
       method: 'PUT',
-      data:data.value,
+      data: data.value,
     })
+  }
+
+  async function delCategory(c_id: any) {
+    try {
+      await ElMessageBox.confirm('您确认要删除该大类吗？', '删除提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+      await myAxios.request<ApiData<null>>({
+        url: `category/${c_id}`,
+        method: 'DELETE',
+      })
+      await getCategories()
+    }
+    catch {
+
+    }
   }
 
   return {
@@ -124,5 +142,6 @@ export default () => {
     addCategory,
     getCategory,
     editCategory,
+    delCategory,
   }
 }

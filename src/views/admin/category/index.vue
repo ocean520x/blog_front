@@ -2,7 +2,7 @@
 import myTopic from '@/composables/myTopic'
 import * as Icon from '@icon-park/vue-next'
 
-const { categories, getCategories } = myTopic()
+const { categories, getCategories, delCategory } = myTopic()
 await getCategories()
 </script>
 
@@ -16,7 +16,7 @@ await getCategories()
         <el-button type="primary" size="small" @click="$router.push({ name: 'category.edit', params: { c_id: category.id } })">
           <icon-editor />&nbsp;编辑
         </el-button>
-        <el-button type="danger" size="small">
+        <el-button type="danger" size="small" @click="delCategory(category.id)">
           <icon-delete />&nbsp;删除
         </el-button>
       </div>
