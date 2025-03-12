@@ -9,6 +9,7 @@ export interface UserModel {
   avatar?: string
   email: string
   is_super_admin: string
+  phone?: string | number
 }
 
 export interface LoginData {
@@ -108,5 +109,5 @@ export interface MyTab {
   label: string
   routeName?: string
   event?: () => void
-  switchShow?:boolean
+  switchShow?: boolean
 }

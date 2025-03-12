@@ -5,6 +5,7 @@ import myAuth from './myAuth'
 
 export default () => {
   const user = ref<UserModel>()
+  const users = ref<PageData<UserModel>>()
   const topics = ref<PageData<MyTopic>>()
   const comments = ref<PageData<MyComment>>()
   const isFavorite = ref<boolean>(false)
@@ -71,6 +72,13 @@ export default () => {
     await myAuth().logout()
   }
 
+  async function getUsers(arg: Record<string, any>) {
+    const paramsStr = Object.entries(arg).map(e => e.join('=')).join('&')
+    users.value = await myAxios.request<PageData<UserModel>>({
+      url: `get_users?${paramsStr}`,
+    })
+  }
+
   return {
     getCurrentUser,
     user,
@@ -84,5 +92,7 @@ export default () => {
     toggleFavorite,
     getOneUserFavoriteTopics,
     updateCurrentUser,
+    users,
+    getUsers,
   }
 }
