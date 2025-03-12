@@ -64,4 +64,18 @@ export default [
       { path: 'edit/:t_id', name: 'topic.edit', meta: { notHistory: true }, component: () => import('@/views/admin/topic/edit.vue') },
     ],
   },
+  {
+    path: '/admin/config',
+    redirect: { name: 'admin.config.show' },
+    component: () => import('@/layout/admin.vue'),
+    meta: { auth: true, menu: { title: '系统配置管理', sort: 4, icon: 'FigmaComponent' } },
+    children: [
+      {
+        path: 'show',
+        name: 'admin.config.show',
+        component: () => import('@/views/admin/config/show.vue'),
+        meta: { menu: { title: '系统配置', routeName: 'admin.config.show' } },
+      },
+    ],
+  },
 ] as RouteRecordRaw[]

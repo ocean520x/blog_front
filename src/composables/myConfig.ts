@@ -11,5 +11,14 @@ export default () => {
     })
     config.value = res.data
   }
-  return { config, getConfig }
+
+  async function setConfig(fieldName: any, data: any) {
+    const res = await myAxios.request<ApiData<MyConfig>>({
+      url: `config/${fieldName}`,
+      method: 'PUT',
+      data,
+    })
+    config.value = res.data
+  }
+  return { config, getConfig, setConfig }
 }
