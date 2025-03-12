@@ -14,6 +14,12 @@ export default [
         meta: { menu: { title: '用户列表', routeName: 'user.index' } },
         component: () => import('@/views/admin/user/index.vue'),
       },
+      {
+        path: 'user/detail/:u_id',
+        name: 'admin.user.detail',
+        meta: { notHistory: true },
+        component: () => import('@/views/admin/user/detail.vue'),
+      },
     ],
   },
   {

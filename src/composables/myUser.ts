@@ -1,8 +1,8 @@
 import type { ApiData, MyComment, MyFavorite, MyTopic, PageData, UserModel } from '@/interfaces/apiResponse'
 import myAxios from '@/plugins/axios'
+import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
 import myAuth from './myAuth'
-import { ElMessageBox } from 'element-plus'
 
 export default () => {
   const user = ref<UserModel>()
@@ -80,7 +80,7 @@ export default () => {
     })
   }
 
-  async function switchFreeze(u_id: any,type: any) {
+  async function switchFreeze(u_id: any, type: any) {
     const str = type == 'yes' ? '解冻' : '冻结'
     await ElMessageBox.confirm(
       `您确定要${str}该用户吗？`,
@@ -89,13 +89,32 @@ export default () => {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-      }
+      },
     )
-      await myAxios.request<ApiData<null>>({
-        url:`user_freeze/${u_id}`,
-        method:'PUT'
+    await myAxios.request<ApiData<null>>({
+      url: `user_freeze/${u_id}`,
+      method: 'PUT',
+    })
+    location.reload()
+  }
+
+  async function delUser(u_id: any) {
+    try {
+      await ElMessageBox.confirm('您确认要删除该用户吗？', '删除提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
       })
-      location.reload();
+      await myAxios.request<ApiData<null>>({
+        url: `user_del/${u_id}`,
+        method: 'DELETE',
+      })
+      // 刷新
+      location.reload()
+    }
+    catch {
+
+    }
   }
 
   return {
@@ -113,6 +132,7 @@ export default () => {
     updateCurrentUser,
     users,
     getUsers,
-    switchFreeze
+    switchFreeze,
+    delUser,
   }
 }
