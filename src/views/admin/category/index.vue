@@ -3,7 +3,7 @@ import AdminCategoryItem from '@/components/admin/category-item.vue'
 import myTopic from '@/composables/myTopic'
 import draggable from 'vuedraggable'
 
-const { categories, getCategories, delCategory } = myTopic()
+const { categories, getCategories, delCategory, changeCategorySort } = myTopic()
 await getCategories()
 </script>
 
@@ -14,6 +14,7 @@ await getCategories()
       group="people"
       item-key="id"
       class="grid grid-cols-6 gap-3 p-3"
+      @end="changeCategorySort"
     >
       <template #item="{ element: category }">
         <AdminCategoryItem :category="category" @del-category="delCategory" />

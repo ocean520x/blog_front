@@ -126,6 +126,14 @@ export default () => {
     }
   }
 
+  async function changeCategorySort() {
+    await myAxios.request<ApiData<null>>({
+      url: `category/change_sort`,
+      method: 'POST',
+      data: { categories: categories.value?.map(c => c.id) },
+    })
+  }
+
   return {
     categories,
     getCategories,
@@ -143,5 +151,6 @@ export default () => {
     getCategory,
     editCategory,
     delCategory,
+    changeCategorySort,
   }
 }
