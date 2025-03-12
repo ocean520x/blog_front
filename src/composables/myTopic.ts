@@ -134,6 +134,26 @@ export default () => {
     })
   }
 
+  async function adminDelTopic(t_id: any) {
+    try {
+      await ElMessageBox.confirm('您确认要删除该帖子吗？', '删除提示', {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+      await myAxios.request<ApiData<null>>({
+        url: `topic/${t_id}`,
+        method: 'DELETE',
+      })
+      // 跳转
+      const route = router.resolve({ name: 'topic.index' })
+      location.href = route.fullPath
+    }
+    catch {
+
+    }
+  }
+
   return {
     categories,
     getCategories,
@@ -152,5 +172,6 @@ export default () => {
     editCategory,
     delCategory,
     changeCategorySort,
+    adminDelTopic,
   }
 }
