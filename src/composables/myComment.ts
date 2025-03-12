@@ -1,4 +1,4 @@
-import type { ApiData, MyComment } from '@/interfaces/apiResponse'
+import type { ApiData, MyComment, PageData } from '@/interfaces/apiResponse'
 import myAxios from '@/plugins/axios'
 import { ElMessageBox } from 'element-plus'
 import { ref } from 'vue'
@@ -8,7 +8,7 @@ export default () => {
    * 直接放组件
    */
   const comments = ref<MyComment[]>()
-
+  const pageAllComments = ref<PageData<MyComment>>()
   /**
    * 放api文件夹
    * @param t_id
@@ -55,5 +55,14 @@ export default () => {
     }
   }
 
-  return { comments, getComments, addComment, addReply, delComment }
+  async function getAllComments(page = 1, params = {}) {
+    const paramsStr = Object.entries(params)
+      .map(e => e.join('='))
+      .join('&')
+    pageAllComments.value = await myAxios.request<PageData<MyComment>>({
+      url: `all_comments?page=${page}&${paramsStr}`,
+    })
+  }
+
+  return { comments, getComments, addComment, addReply, delComment, pageAllComments, getAllComments }
 }

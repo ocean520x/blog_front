@@ -65,10 +65,24 @@ export default [
     ],
   },
   {
+    path: '/admin/comment',
+    redirect: { name: 'comment.index' },
+    component: () => import('@/layout/admin.vue'),
+    meta: { auth: true, menu: { title: '评论管理', sort: 4, icon: 'MultiCircular' } },
+    children: [
+      {
+        path: 'index',
+        name: 'comment.index',
+        meta: { menu: { title: '评论列表', routeName: 'comment.index' } },
+        component: () => import('@/views/admin/comment/index.vue'),
+      },
+    ],
+  },
+  {
     path: '/admin/config',
     redirect: { name: 'admin.config.show' },
     component: () => import('@/layout/admin.vue'),
-    meta: { auth: true, menu: { title: '系统配置管理', sort: 4, icon: 'FigmaComponent' } },
+    meta: { auth: true, menu: { title: '系统配置管理', sort: 5, icon: 'FigmaComponent' } },
     children: [
       {
         path: 'show',
